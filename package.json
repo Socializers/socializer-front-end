@@ -19,10 +19,12 @@
   "bugs": {
     "url": "https://github.com/Socializers/socializer-front-end/issues"
   },
-  "homepage": "https://github.com/Socializers/socializer-front-end",
+  "homepage": "/",
   "dependencies": {
+    "jsonwebtoken": "^8.5.1",
     "node-sass": "^4.13.1",
     "react": "^16.13.1",
+    "react-cookies": "^0.1.1",
     "react-dom": "^16.13.1",
     "react-jsonschema-form": "^1.8.1",
     "react-router-dom": "^5.1.2",
