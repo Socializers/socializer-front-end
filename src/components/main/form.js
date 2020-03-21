@@ -4,7 +4,7 @@ import useFetch from '../hooks/useFetch.js';
 import { When } from '../if';
 import Modal from '../modal';
 import { ModelContext } from '../../context/modal.js';
-const ourAPI = process.env.REACT_APP_API;
+const ourAPI = 'http://localhost:3030/api/v1/anime';
 
 function Cool (props){
   const context = useContext(ModelContext);
@@ -16,16 +16,18 @@ function Cool (props){
   console.log('gggddddd', context.model);
 
   const handleInputChange = e => {
-    setItem({...item, [e.target]: e.target.value});
+    setItem({...item, [e.target.name]: e.target.value});
   };
 
   const callAPI = (url, method = 'get', body, handler, errorHandler) => {
+    console.log('fuzz', body);
     return fetch(url, {
       method: method,
       mode: 'cors',
       cache: 'no-cache',
       headers: new Headers({
         'Content-Type': 'application/json',
+        'Accept': 'application/json',
       }),
       body: body ? JSON.stringify(body) : undefined,
     })
@@ -38,15 +40,16 @@ function Cool (props){
     e.preventDefault();
     e.target.reset();
 
-    const _updateState = newItem => setModalList([...modalList, newItem]);
+    const _updateState = newItem => 
+      setModalList([...modalList, newItem]);
 
-    callAPI(ourAPI, 'POST', item, _updateState);
+    callAPI(`${ourAPI}`, 'POST', item, _updateState);
   };
 
   const deleteItem = id => {
 
     const _updateState = () => {
-      setModalList(modalList.filter(item => item._id !== id));
+      setModalList( modalList.filter(item => item._id !== id));
     };
 
     callAPI(`${ourAPI}/${id}`, 'DELETE', undefined, _updateState);
@@ -102,9 +105,14 @@ function Cool (props){
             <div className="item">
               {details.name}
             </div>
-            <header>
-              <span>Des: {details.des}</span>
-            </header>
+            <ul>
+              {Object.keys(details).map((property,idx) => {  
+                if(idx > 1 && property !== '__v'){
+                  return <li>{property}: {details[property]}</li>;
+                }
+              })}
+              {console.log('fooo',Object.keys(details))}
+            </ul>
           </div>
         </Modal>
       </When>
