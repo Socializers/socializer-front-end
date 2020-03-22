@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 import React, { useContext } from 'react';
 import { ModelContext } from '../../context/modal.js';
 import { Route, Redirect, Link } from 'react-router-dom';

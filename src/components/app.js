@@ -11,6 +11,21 @@ import Login from './auth/login.js';
 import Auth from './auth/auth.js';
 import Footer from './footer';
 
+const Edit = props => {
+  return (
+    <Auth capability="update">
+      <span>You can edit!</span>
+    </Auth>
+  );
+};
+
+const Delete = props => {
+  return (
+    <Auth capability="delete">
+      <span>You can delete!</span>
+    </Auth>
+  );
+};
 
 export default function App() {
   return(
@@ -21,8 +36,8 @@ export default function App() {
         <Route exact path='/login' render={() => 
           <LoginContext>
             <Login />
-            {/* <Edit />
-          <Delete /> */}
+            <Edit />
+            <Delete />
           </LoginContext>
         }></Route>
         <Route exact path='/app' render={() => <Model />}></Route>

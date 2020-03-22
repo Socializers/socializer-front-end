@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+
 import React, {useState, useEffect, useContext} from 'react';
 import useFetch from '../hooks/useFetch.js';
 import { When } from '../if';
@@ -13,21 +14,19 @@ function Cool (props){
   const[showDetails, setShowDetails] = useState(false);
   const[details, setDetails] = useState({});
   useFetch(ourAPI, {}, setModalList);
-  console.log('gggddddd', context.model);
 
   const handleInputChange = e => {
     setItem({...item, [e.target.name]: e.target.value});
   };
 
   const callAPI = (url, method = 'get', body, handler, errorHandler) => {
-    console.log('fuzz', body);
+    console.log('__STATE__',handler);
     return fetch(url, {
       method: method,
       mode: 'cors',
       cache: 'no-cache',
       headers: new Headers({
         'Content-Type': 'application/json',
-        'Accept': 'application/json',
       }),
       body: body ? JSON.stringify(body) : undefined,
     })
@@ -49,6 +48,8 @@ function Cool (props){
   const deleteItem = id => {
 
     const _updateState = () => {
+      console.log('qqqqqq', modalList);
+      console.log('vvvvvv', modalList.filter(item => item._id !== id));
       setModalList( modalList.filter(item => item._id !== id));
     };
 
@@ -108,10 +109,9 @@ function Cool (props){
             <ul>
               {Object.keys(details).map((property,idx) => {  
                 if(idx > 1 && property !== '__v'){
-                  return <li>{property}: {details[property]}</li>;
+                  return <li key={idx}>{property}: {details[property]}</li>;
                 }
               })}
-              {console.log('fooo',Object.keys(details))}
             </ul>
           </div>
         </Modal>
