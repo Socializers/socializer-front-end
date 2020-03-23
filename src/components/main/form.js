@@ -1,10 +1,18 @@
 /* eslint-disable no-unused-vars */
 
 import React, {useState, useEffect, useContext} from 'react';
+import Loader from 'react-loader-spinner';
+import $ from 'jquery';
 import useFetch from '../hooks/useFetch.js';
 import { When } from '../if';
 import Modal from '../modal';
 import { ModelContext } from '../../context/modal.js';
+import { FaFeather, FaSave } from 'react-icons/fa';
+
+const If = props => {
+  return props.condition ? props.children : null;
+};
+
 const ourAPI = 'http://localhost:3030/api/v1/anime';
 
 function Cool (props){
@@ -13,6 +21,7 @@ function Cool (props){
   const[item, setItem] = useState({});
   const[showDetails, setShowDetails] = useState(false);
   const[details, setDetails] = useState({});
+  const[showField, setShowField] = useState(false);
   useFetch(ourAPI, {}, setModalList);
 
   const handleInputChange = e => {
@@ -56,24 +65,34 @@ function Cool (props){
     callAPI(`${ourAPI}/${id}`, 'DELETE', undefined, _updateState);
   };
 
-  const updateItem = updatedItem => {
+  const updateItem = e => {
+    e.preventDefault();
+
+    setShowField(!showField);
+    setShowDetails(!showDetails);
+    const updatedItem = $('#updateForm').serializeArray();
+
+    updatedItem.forEach( oneProp => {
+      setItem({...item, [oneProp.name]: oneProp.value});
+    });
 
     const _updateState = newItem => setModalList(modalList.map(item => item._id === newItem._id ? newItem : item));
 
-    callAPI(`${ourAPI}/${updatedItem.id}`, 'PUT', updatedItem, _updateState );
+    callAPI(`${ourAPI}/${details._id}`, 'PUT', item, _updateState );
+  };
+
+  const handleUpdate = () => {
+    setShowField(!showField);
   };
   
   const toggleDetails = id => {
     setShowDetails(!showDetails);
+    console.log('__SSS__',modalList.filter(item => item._id === id)[0] || {});
     setDetails(modalList.filter(item => item._id === id)[0] || {});
   };
 
   return (
     <>
-      <header>
-        {/* <h2>{model}</h2> */}
-      </header>
-
       <section>
         <div className='modal-form'>
           <form onSubmit={addItem}>
@@ -103,16 +122,33 @@ function Cool (props){
       <When condition={showDetails}>
         <Modal title="To Do Item" close={toggleDetails}>
           <div className="todo-details">
-            <div className="item">
-              {details.name}
-            </div>
-            <ul>
-              {Object.keys(details).map((property,idx) => {  
-                if(idx > 1 && property !== '__v'){
-                  return <li key={idx}>{property}: {details[property]}</li>;
-                }
-              })}
-            </ul>
+            <If condition={!showField}>
+              <div className="item">
+                {details.name} <FaFeather onClick={handleUpdate} />
+              </div>
+              <ul>
+                {Object.keys(details).map((property,idx) => {
+                  if(idx > 1 && property !== '__v'){
+                    return <li key={idx}>{property}:{' '}
+                      <span> {details[property]}</span>
+                    </li>;
+                  }
+                })}
+              </ul>
+            </If>
+            <If condition={showField}>
+              <form id='updateForm' onSubmit={updateItem}>
+                {/* <a href={$('#updateForm').submit()}><FaSave /></a> */}
+                {Object.keys(details).map((property,idx) => {
+                  if(property !== '__v' && property !== '_id'){
+                    return <li key={idx}>{property}:{' '}
+                      <input onChange={handleInputChange} name={property} defaultValue={details[property]} /> 
+                    </li>;
+                  }
+                })}
+                <button><FaSave /></button>
+              </form>
+            </If>
           </div>
         </Modal>
       </When>

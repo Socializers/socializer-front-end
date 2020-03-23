@@ -7,7 +7,7 @@ const If = props => {
   return props.condition ? props.children : null;
 };
 
-class Login extends React.Component {
+class Signup extends React.Component {
     static contextType = LoginContext;
 
     constructor(props){
@@ -19,12 +19,13 @@ class Login extends React.Component {
     }
 
     handleChange = e => {
+      console.log('dede',this.state);
       this.setState({[e.target.name] : e.target.value});
     }
 
     handleSubmit = e => {
       e.preventDefault();
-      this.context.login(this.state.username, this.state.password);
+      this.context.signup(this.state.username, this.state.password);
       e.target.reset();
     }
 
@@ -34,12 +35,12 @@ class Login extends React.Component {
           <If condition={this.context.loggedIn}>
             <button onClick={this.context.logout}>Log Out!</button>
           </If>
-
+          
           <If condition={!this.context.loggedIn}>
             <form onSubmit={this.handleSubmit}>
               <input name='username' onChange={this.handleChange} />
               <input name='password' onChange={this.handleChange} />
-              <button>Log In!</button>
+              <button>Signup!</button>
             </form>
           </If>
         </>
@@ -47,4 +48,4 @@ class Login extends React.Component {
     }
 }
 
-export default Login;
+export default Signup;

@@ -13,6 +13,7 @@ class LoginProvider extends React.Component {
       loggedIn: false,
       login: this.login,
       logout: this.logout,
+      signup: this.signup,
       user: {},
     };
   }
@@ -29,6 +30,22 @@ class LoginProvider extends React.Component {
       .then(response => response.text())
       .then(token => this.validateToken(token))
       .catch(console.error);
+  }
+
+  signup = (username, password) => {
+    fetch(`${API}/signup`,{
+      method: 'post',
+      mode: 'cors',
+      cache: 'no-cache',
+      headers: new Headers({
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify({username: username, password: password}),
+    })
+      .then(response => response.text())
+      .then(token => this.validateToken(token))
+      .catch(e => console.error(e));
   }
 
   validateToken = token => {

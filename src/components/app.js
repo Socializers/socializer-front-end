@@ -3,43 +3,33 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 
 import Header from './header';
+import Home from './homePage/';
 import ModelProvider from '../context/modal.js';
 import Model from './main/model.js';
 import Form from './main/form.js';
 import LoginContext from './auth/context.js';
 import Login from './auth/login.js';
-import Auth from './auth/auth.js';
+import Signup from './auth/signup.js';
+// import Auth from './auth/auth.js';
 import Footer from './footer';
 
-const Edit = props => {
-  return (
-    <Auth capability="update">
-      <span>You can edit!</span>
-    </Auth>
-  );
-};
-
-const Delete = props => {
-  return (
-    <Auth capability="delete">
-      <span>You can delete!</span>
-    </Auth>
-  );
-};
+// import './app.scss';
 
 export default function App() {
   return(
     <>
       <ModelProvider>
         <Header />
+        <Route exact path='/' render={()=>< Home/>} />
         <Route exact path='/form' render={()=><Form /> }></Route>
-        <Route exact path='/login' render={() => 
-          <LoginContext>
+        <LoginContext>
+          <Route exact path='/login' render={() => 
             <Login />
-            <Edit />
-            <Delete />
-          </LoginContext>
-        }></Route>
+          }></Route>
+          <Route exact path='/signup' render={() => 
+            <Signup />
+          }></Route>
+        </LoginContext> 
         <Route exact path='/app' render={() => <Model />}></Route>
         <Footer />
       </ModelProvider>
