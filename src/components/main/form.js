@@ -13,7 +13,7 @@ const If = props => {
   return props.condition ? props.children : null;
 };
 
-const ourAPI = 'http://localhost:3030/api/v1/anime';
+const ourAPI = 'http://localhost:3030/api/v1';
 
 function Cool (props){
   const context = useContext(ModelContext);
@@ -22,14 +22,13 @@ function Cool (props){
   const[showDetails, setShowDetails] = useState(false);
   const[details, setDetails] = useState({});
   const[showField, setShowField] = useState(false);
-  useFetch(ourAPI, {}, setModalList);
+  useFetch(`${ourAPI}/${context.model}`, {}, setModalList);
 
   const handleInputChange = e => {
     setItem({...item, [e.target.name]: e.target.value});
   };
 
   const callAPI = (url, method = 'get', body, handler, errorHandler) => {
-    console.log('__STATE__',handler);
     return fetch(url, {
       method: method,
       mode: 'cors',
@@ -48,21 +47,25 @@ function Cool (props){
     e.preventDefault();
     e.target.reset();
 
+    const addForm = $('#addForm').serializeArray();
+
+    addForm.forEach( oneProp => {
+      setItem({...item, [oneProp.name]: oneProp.value});
+    });
+
     const _updateState = newItem => 
       setModalList([...modalList, newItem]);
 
-    callAPI(`${ourAPI}`, 'POST', item, _updateState);
+    callAPI(`${ourAPI}/${context.model}`, 'POST', item, _updateState);
   };
 
   const deleteItem = id => {
 
     const _updateState = () => {
-      console.log('qqqqqq', modalList);
-      console.log('vvvvvv', modalList.filter(item => item._id !== id));
       setModalList( modalList.filter(item => item._id !== id));
     };
 
-    callAPI(`${ourAPI}/${id}`, 'DELETE', undefined, _updateState);
+    callAPI(`${ourAPI}/${context.model}/${id}`, 'DELETE', undefined, _updateState);
   };
 
   const updateItem = e => {
@@ -70,24 +73,32 @@ function Cool (props){
 
     setShowField(!showField);
     setShowDetails(!showDetails);
-    const updatedItem = $('#updateForm').serializeArray();
 
+    const updatedItem = $('#updateForm').serializeArray();
+    
     updatedItem.forEach( oneProp => {
       setItem({...item, [oneProp.name]: oneProp.value});
     });
 
     const _updateState = newItem => setModalList(modalList.map(item => item._id === newItem._id ? newItem : item));
 
-    callAPI(`${ourAPI}/${details._id}`, 'PUT', item, _updateState );
+    callAPI(`${ourAPI}/${context.model}/${details._id}`, 'PUT', item, _updateState );
   };
 
   const handleUpdate = () => {
     setShowField(!showField);
   };
+
+  const handleNewField = () => {
+    $('#updateForm ul').append(`<li>${$('#newField').val()}: <input class='newInput' name=${$('#newField').val()} /></li>`);
+    $('.newInput').on('change', handleInputChange);
+
+    $('#newAddField').before(`<input class='newAddInput' name=${$('#newAddField').val()} placeholder=${$('#newAddField').val()} />`);
+    $('.newAddInput').on('change', handleInputChange);
+  };
   
   const toggleDetails = id => {
     setShowDetails(!showDetails);
-    console.log('__SSS__',modalList.filter(item => item._id === id)[0] || {});
     setDetails(modalList.filter(item => item._id === id)[0] || {});
   };
 
@@ -95,9 +106,10 @@ function Cool (props){
     <>
       <section>
         <div className='modal-form'>
-          <form onSubmit={addItem}>
+          <form id='addForm' onSubmit={addItem}>
             <input name="name" placeholder="item name" onChange={handleInputChange} required />
             <input name="des" placeholder="item des" onChange={handleInputChange} required />
+            <input id='newAddField' placeholder='new field' /> <button type='button' onClick={handleNewField}>add field</button>
             <button>Add</button>
           </form>
         </div>
@@ -138,14 +150,16 @@ function Cool (props){
             </If>
             <If condition={showField}>
               <form id='updateForm' onSubmit={updateItem}>
-                {/* <a href={$('#updateForm').submit()}><FaSave /></a> */}
-                {Object.keys(details).map((property,idx) => {
-                  if(property !== '__v' && property !== '_id'){
-                    return <li key={idx}>{property}:{' '}
-                      <input onChange={handleInputChange} name={property} defaultValue={details[property]} /> 
-                    </li>;
-                  }
-                })}
+                <ul>
+                  {Object.keys(details).map((property,idx) => {
+                    if(property !== '__v' && property !== '_id'){
+                      return <li key={idx}>{property}:{' '}
+                        <input onChange={handleInputChange} name={property} defaultValue={details[property]} /> 
+                      </li>;
+                    }
+                  })}
+                </ul>
+                <input id='newField' /> <button type='button' onClick={handleNewField}>add field</button>
                 <button><FaSave /></button>
               </form>
             </If>

@@ -11,11 +11,11 @@ export default function Header() {
         <img src={require('../images/logo.png')} />
         <nav>
           <ul>
-            <li><Link to="/"> Home </Link></li>
-            <li><Link to="/app"> Check App </Link></li>
-            <li><Link to="/form"> Form </Link></li>
+            <Link to="/"><li> Home </li></Link>
+            <Link to="/app"><li> Check App</li></Link>
+            <Link to="/form"><li>Form</li></Link>
             <span>
-              <Link to="/login"><li> Login </li></Link>
+              <Link to="/login"><li> Signin </li></Link>
               <Link to="/signup"><li> Signup </li></Link>
             </span>
           </ul>

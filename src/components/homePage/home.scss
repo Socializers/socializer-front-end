@@ -19,21 +19,26 @@ header {
   }
   nav {
     position: absolute;
-    top: -10%;
-    left: 65%;
-    width: 30%;
-    li {
-      display: inline;
-      margin: 0% 1%;
-      //   word-spacing: 10px;
-      a {
-        text-decoration: none;
+    top: -12%;
+    left: 60%;
+    width: 40%;
+    a {
+      text-decoration: none;
+      li {
+        display: inline;
+        margin: 0% 1%;
+        padding: 12px 13px;
+
+        &:hover {
+          background-color: rgb(26, 83, 156);
+          color: whitesmoke;
+        }
       }
     }
     span {
       //   border: solid;
       padding: 5px 0px;
-      margin-left: 9%;
+      margin-left: 8%;
       a {
         color: white;
         text-decoration: none;
@@ -42,6 +47,14 @@ header {
           // border: solid;
           padding: 12px 13px;
           text-align: center;
+
+          &:hover {
+            background-color: rgb(35, 28, 71);
+          }
+
+          &:active{
+            background-color: darkslateblue;
+          }
         }
       }
     }
