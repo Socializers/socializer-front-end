@@ -1,14 +1,14 @@
 /* eslint-disable no-unused-vars */
 
 import React, {useState, useEffect, useContext} from 'react';
+import { FaFeather, FaSave } from 'react-icons/fa';
 import Loader from 'react-loader-spinner';
 import $ from 'jquery';
 import useFetch from '../hooks/useFetch.js';
 import { When } from '../if';
 import Modal from '../modal';
 import { ModelContext } from '../../context/modal.js';
-import { FaFeather, FaSave } from 'react-icons/fa';
-
+import ConfirmButton from './confirmButton.js';
 const If = props => {
   return props.condition ? props.children : null;
 };
@@ -122,9 +122,10 @@ function Cool (props){
                 <button onClick={() => toggleDetails(item._id)} >
                   Details
                 </button>
-                <button onClick={()=> deleteItem(item._id)}>
-                  DELETE
-                </button>
+                <ConfirmButton
+                  dialog={['Delete', 'Are You Sure?', 'Once more to delete']}
+                  action={() => deleteItem(item._id)}
+                />
               </li>
             ))}
           </ul>
