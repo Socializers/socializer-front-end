@@ -29,6 +29,31 @@ class Signup extends React.Component {
       e.target.reset();
     }
 
+    handleGoogleSubmit = () => {
+      this.context.googleSignup();
+    }
+
+    componentDidMount() {
+    
+      let BASEURL = 'https://accounts.google.com/o/oauth2/v2/auth';
+      
+      let queryObject = {
+        response_type: 'code',
+        client_id: '1082218993942-1ib34ft542p930gk7ilh8ngf8roopm64.apps.googleusercontent.com',
+        scope: 'openid email',
+        redirect_uri: 'http://localhost:3000/',
+        state: 'http://localhost',
+        access_type: 'offline',
+      };
+
+      let Query = Object.keys(queryObject).map((val) => {
+        return `${val}=` + encodeURIComponent(queryObject[val]);
+      }).join('&');
+      let theAuthURL = `${BASEURL}?${Query}`;
+      let url = document.getElementById('google');
+      url.setAttribute('href', theAuthURL);
+    }
+
     render() {
       return (
         <>
@@ -42,6 +67,8 @@ class Signup extends React.Component {
               <input name='password' onChange={this.handleChange} />
               <button>Signup!</button>
             </form>
+
+            <a onLoad={this.handleGoogleInfo} onClick={this.handleGoogleSubmit} id='google'>Signup with Google</a>
           </If>
         </>
       );

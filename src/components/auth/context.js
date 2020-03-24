@@ -14,6 +14,7 @@ class LoginProvider extends React.Component {
       login: this.login,
       logout: this.logout,
       signup: this.signup,
+      googleSignup: this.googleOauth,
       user: {},
     };
   }
@@ -43,6 +44,13 @@ class LoginProvider extends React.Component {
       }),
       body: JSON.stringify({username: username, password: password}),
     })
+      .then(response => response.text())
+      .then(token => this.validateToken(token))
+      .catch(e => console.error(e));
+  }
+
+  googleOauth = () => {
+    fetch(`${API}/google`)
       .then(response => response.text())
       .then(token => this.validateToken(token))
       .catch(e => console.error(e));
