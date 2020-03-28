@@ -8,7 +8,7 @@ export default function Header() {
   return(
     <>
       <header>
-        <img src={require('../images/logo.png')} />
+        <img src={require('../images/homepage/logo.png')} />
         <nav>
           <ul>
             <Link to="/"><li> Home </li></Link>
