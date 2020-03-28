@@ -185,6 +185,7 @@ html {
   display: flex;
   flex-direction: column;
   height: 1500px;
+  margin-bottom: 0%;
   overflow-x: hidden;
   padding: 5% 0%;
 
@@ -402,6 +403,25 @@ html {
   .from-right.appear {
     transform: translateX(0);
     opacity: 1;
+  }
+}
+
+.fourth-section{
+  background-color: black;
+  border: solid black;
+  color: white;
+  height: 230px;
+
+  h2{
+    // border: solid;
+    font-size: 2.3em;
+    margin-bottom: 3%;
+    margin-left: 5%;
+  }
+
+  p{
+    font-size: 1.3em;
+    margin-left: 5%;
   }
 }
 

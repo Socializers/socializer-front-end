@@ -135,6 +135,12 @@ class Home extends React.Component {
             <span className='slide-in-3 from-left'><img src={require('../images/homepage/anime.jpg')} /></span>
           </div>
         </section>
+
+        <section className='fourth-section fade-in'>
+          <h2>A Word From The Team</h2>
+          <p>We hope that our app will drive the benefits to every single member in our society.</p>
+          <p>With that being said, our message is to let our community educated and filled with many skills that will help them to face the life.</p>
+        </section>
       </>
     );
   }
