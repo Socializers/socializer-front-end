@@ -1,55 +1,96 @@
 header {
-  background-color: rgb(220, 230, 235);
-  border: solid rgb(220, 230, 235);
-  height: 40px;
-  position: relative;
+  background-color: rgba(220, 230, 235, 0);
+  // border: solid;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  width: 100%;
   z-index: 99;
-  img {
+
+  h1 {
     // border: solid;
-    position: absolute;
-    top: 20%;
-    width: 10%;
+    color: yellowgreen;
+    font-family: 'ZCOOL XiaoWei', serif;
+    font-size: 2.7em;
+    font-style: italic;
+    position: relative;
+    top: -30%;
+    text-align: center;
+    width: 20%;
   }
-  nav {
+
+  .main {
+    // border: solid;
+    font-size: 1.3em;
     position: absolute;
-    top: -12%;
-    left: 60%;
+    top: 5%;
+    left: 20%;
     width: 40%;
+
     a {
       text-decoration: none;
+      color: white;
+
       li {
+        // border: solid;
         display: inline;
         margin: 0% 1%;
         padding: 12px 13px;
 
         &:hover {
-          background-color: rgb(26, 83, 156);
-          color: whitesmoke;
-        }
-      }
-    }
-    span {
-      //   border: solid;
-      padding: 5px 0px;
-      margin-left: 8%;
-      a {
-        color: white;
-        text-decoration: none;
-        li {
-          background-color: rgb(49, 138, 255);
-          // border: solid;
-          padding: 12px 13px;
-          text-align: center;
-
-          &:hover {
-            background-color: rgb(35, 28, 71);
-          }
-
-          &:active {
-            background-color: darkslateblue;
-          }
+          border-bottom: solid 1px;
+          color: rgb(139, 200, 218);
         }
       }
     }
   }
+
+  .account {
+    // border: solid;
+    font-size: 1.3em;
+    position: absolute;
+    top: 5%;
+    left: 65%;
+    text-align: center;
+    width: 30%;
+
+    a {
+      text-decoration: none;
+      color: white;
+
+      li {
+        border: solid 1px;
+        border-radius: 2em;
+        display: inline;
+        margin: 0% 5%;
+        padding: 12px 13px;
+
+        &:hover {
+          background-color: rgb(102, 150, 165);
+          color: black;
+        }
+      }
+    }
+    a:nth-of-type(2) {
+      color: white;
+
+      li {
+        background-color: rgb(46, 80, 90);
+
+        &:hover {
+          background-color: rgb(102, 150, 165);
+          color: black;
+        }
+      }
+    }
+  }
+}
+
+.nav-scrolled {
+  color: #333;
+  --text-inverse: #502fbe;
+  background-image: linear-gradient(to right, rgb(46, 80, 90), rgb(120, 202, 82));
+  box-shadow: 0 3px 20px rgba(0, 0, 0, 0.2);
 }

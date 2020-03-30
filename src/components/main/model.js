@@ -1,9 +1,11 @@
 /* eslint-disable no-unused-vars */
 
-import React, { useContext, useEffect } from 'react';
-import { ModelContext } from '../../context/modal.js';
+import React, { useContext, useEffect, useState } from 'react';
 import { Route, Redirect, Link } from 'react-router-dom';
-import Form from './form.js';
+import $ from 'jquery';
+
+import { ModelContext } from '../../context/modal.js';
+import FileUpload from '../fileUpload';
 import './model.scss';
 
 function Model(props) {
@@ -14,7 +16,7 @@ function Model(props) {
 
     const appearOptions = {
       threshold: 0,
-      rootMargin: '0px 0px -50px 0px',
+      rootMargin: '0px 0px -200px 0px',
     };
 
     const appearOnScroll = new IntersectionObserver((entries, appearOnScroll) => {
@@ -33,6 +35,7 @@ function Model(props) {
     });
 
   });
+
   const submitHandler = e => {
     e.preventDefault();
     e.target.reset();
@@ -50,6 +53,29 @@ function Model(props) {
       body: JSON.stringify({model: modelName}),
     });
   };
+
+  const createCard = () => {
+    console.log('here', context.modelName);
+    $('.second-section-model').append(`
+      <div class='card slide-in from-left'>
+        <a href='/form'>
+          <div>
+            <div>
+              <h3>${context.modelName}</h3>
+              <p>${context.modelDesc}</p>
+            </div>
+${ context.uploadedFile.fileName !== undefined ? 
+    ( `<img alt=${context.uploadedFile.fileName} src=${require(`../images/uploads/${context.uploadedFile.fileName}`)} />` ) 
+    : `<img alt='null' src=${require('../images/null.jpg')} />`
+}
+            </div>
+        </a>
+      </div>`,
+    );
+    // $('.card a > div:first-of-type').attr('class', 'value');
+    $('.card a > div:first-of-type').on('click', () => context.changeModelName(context.modelName));
+  };
+  
   return (
     <>
       <section className='first-section-model'>
@@ -59,51 +85,69 @@ function Model(props) {
       </section>
 
       <section className='second-section-model'>
-        <div className='first-card slide-in from-left'>
-          <div>
-            <div>
-              <h3>Web Development</h3>
-              <p>A whole section about web development and how to become a professional softwaere engineer by watching our courses in this field.</p>
+        <div className='card slide-in from-left'>
+          <Link to='/form'>
+            <div onClick={()=> context.changeModelName('developers')}>
+              <div>
+                <h3>Web Development</h3>
+                <p>A whole section about web development and how to become a professional softwaere engineer by watching our courses in this field.</p>
+              </div>
+              <img alt='development' src={require('../images/homepage/developer.jpg')} />
             </div>
-            <img src={require('../images/homepage/developer.jpg')} />
-          </div>
+          </Link>
         </div>
-        <div className='second-card slide-in from-left'>
-          <div>
-            <div>
-              <h3>Science</h3>
-              <p>Learn new languages like English and Arabic</p>
+
+        <div className='card slide-in from-left'>
+          <Link to='/form'>
+            <div onClick={()=> context.changeModelName('science')}>
+              <div>
+                <h3>Science</h3>
+                <p>Learn new languages like English and Arabic</p>
+              </div>
+              <img alt='science' src={require('../images/homepage/science.jpg')} />
             </div>
-            <img src={require('../images/homepage/science.jpg')} />
-          </div>
+          </Link>
         </div>
-        <div className='third-card slide-in from-left'>
-          <div>
-            <div>
-              <h3>Languages</h3>
-              <p>Learn new languages like English and Arabic.</p>
+
+        <div className='card slide-in from-left'>
+          <Link to='/form'>
+            <div onClick={()=> context.changeModelName('languages')}>
+              <div>
+                <h3>Languages</h3>
+                <p>Learn new languages like English and Arabic.</p>
+              </div>
+              <img alt='languages' src={require('../images/homepage/languages.jpg')} />
             </div>
-            <img src={require('../images/homepage/languages.jpg')} />
-          </div>
+          </Link>
         </div>
-        <div className='fourth-card slide-in from-left'>
-          <div>
-            <div>
-              <h3>Anime</h3>
-              <p>Watch animes in way that will entertain you.</p>
+        
+        <div className='card slide-in from-left'>
+          <Link to='/form'>
+            <div onClick={()=> context.changeModelName('anime')}>
+              <div>
+                <h3>Anime</h3>
+                <p>Watch animes in way that will entertain you.</p>
+              </div>
+              <img alt='anime' src={require('../images/homepage/anime.jpg')} />
             </div>
-            <img src={require('../images/homepage/anime.jpg')} />
-          </div>
+          </Link>
         </div>
       </section>
 
       <section className='third-section-model'>
-        <form onSubmit={submitHandler}>
-          <input onChange={e => context.changeModel(e.target.value)} />
-          {console.log(context.model)}
-          <button onClick={()=> callAPI(context.model)} type='button'>Create Model</button>
+        <h4>In case you want to add any section that you think it is valuable to our club just give it a name and hit the button below</h4>
+        <form className='model-form' onSubmit={submitHandler}>
+          <div>
+            <input placeholder='Your Model Name' required onChange={e => context.changeModelName(e.target.value)} />
+            <textarea required onChange={e => context.changeModelDesc(e.target.value)} />
+          </div>
+          <FileUpload />
+          <button onClick={()=> {
+            callAPI(context.modelName);
+            createCard();
+            // window.location.href='/form';
+          }} type='button'> Create Model </button>
         </form>
-        <Link to='/form'>Go!</Link>
       </section>
     </>
   );

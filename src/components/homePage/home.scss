@@ -1,12 +1,43 @@
 body,
 html {
-  background-color: rgb(255, 255, 255);
   margin: 0;
   padding: 0;
   width: 100%;
 }
 
+.zero-section {
+  // border: solid;
+  position: relative;
+  height: 625px;
+  z-index: 97;
+
+  div {
+    background-color: black;
+    height: 100%;
+    width: 100%;
+
+    img {
+      height: 100%;
+      opacity: 0.2;
+      width: 100%;
+    }
+
+    h2 {
+      color: rgb(255, 255, 255);
+      // border: solid;
+      font-size: 1.8em;
+      position: absolute;
+      bottom: 45%;
+      left: 30%;
+      text-align: center;
+      width: 40%;
+      z-index: 100;
+    }
+  }
+}
+
 .first-section {
+  background-color: white;
   // border: solid;
   height: 500px;
   position: relative;
@@ -74,6 +105,7 @@ html {
 }
 
 .second-section {
+  background-color: white;
   // border: solid;
   position: relative;
   text-align: center;
@@ -180,7 +212,7 @@ html {
 
 .third-section {
   align-items: center;
-  background-color: #00c3ff21;
+  background-color: #66ff002a;
   // border: solid;
   display: flex;
   flex-direction: column;
@@ -198,7 +230,7 @@ html {
     width: 70%;
 
     span {
-      background-image: linear-gradient(to right, rgb(46, 80, 90), rgb(120, 202, 82));
+      background-image: linear-gradient(to right, rgb(46, 80, 90), rgb(124, 133, 51));
       border-radius: 20px 20px 20px 340px;
       width: 100%;
     }
@@ -245,7 +277,7 @@ html {
     width: 70%;
 
     span {
-      background-image: linear-gradient(to right, rgb(46, 80, 90), rgb(120, 202, 82));
+      background-image: linear-gradient(to right, rgb(46, 80, 90), rgb(124, 133, 51));
       border-radius: 20px 20px 340px 20px;
       width: 100%;
     }
@@ -295,7 +327,7 @@ html {
     width: 70%;
 
     span {
-      background-image: linear-gradient(to right, rgb(46, 80, 90), rgb(120, 202, 82));
+      background-image: linear-gradient(to right, rgb(46, 80, 90), rgb(124, 133, 51));
       border-radius: 20px 20px 20px 340px;
       width: 100%;
     }
@@ -344,7 +376,7 @@ html {
     height: 25%;
 
     span {
-      background-image: linear-gradient(to right, rgb(46, 80, 90), rgb(120, 202, 82));
+      background-image: linear-gradient(to right, rgb(46, 80, 90), rgb(124, 133, 51));
       border-radius: 20px 20px 340px 20px;
       width: 52%;
     }
@@ -406,20 +438,20 @@ html {
   }
 }
 
-.fourth-section{
-  background-color: black;
-  border: solid black;
-  color: white;
+.fourth-section {
+  background-color: #66ff003f;
+  border: solid rgba(0, 0, 0, 0);
+  color: rgb(0, 0, 0);
   height: 230px;
 
-  h2{
+  h2 {
     // border: solid;
     font-size: 2.3em;
     margin-bottom: 3%;
     margin-left: 5%;
   }
 
-  p{
+  p {
     font-size: 1.3em;
     margin-left: 5%;
   }

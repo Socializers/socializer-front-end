@@ -22,7 +22,7 @@ function Cool (props){
   const[showDetails, setShowDetails] = useState(false);
   const[details, setDetails] = useState({});
   const[showField, setShowField] = useState(false);
-  useFetch(`${ourAPI}/${context.model}`, {}, setModalList);
+  useFetch(`${ourAPI}/${context.modelName}`, {}, setModalList);
 
   const handleInputChange = e => {
     setItem({...item, [e.target.name]: e.target.value});
@@ -56,7 +56,7 @@ function Cool (props){
     const _updateState = newItem => 
       setModalList([...modalList, newItem]);
 
-    callAPI(`${ourAPI}/${context.model}`, 'POST', item, _updateState);
+    callAPI(`${ourAPI}/${context.modelName}`, 'POST', item, _updateState);
   };
 
   const deleteItem = id => {
@@ -65,7 +65,7 @@ function Cool (props){
       setModalList( modalList.filter(item => item._id !== id));
     };
 
-    callAPI(`${ourAPI}/${context.model}/${id}`, 'DELETE', undefined, _updateState);
+    callAPI(`${ourAPI}/${context.modelName}/${id}`, 'DELETE', undefined, _updateState);
   };
 
   const updateItem = e => {
@@ -82,7 +82,7 @@ function Cool (props){
 
     const _updateState = newItem => setModalList(modalList.map(item => item._id === newItem._id ? newItem : item));
 
-    callAPI(`${ourAPI}/${context.model}/${details._id}`, 'PUT', item, _updateState );
+    callAPI(`${ourAPI}/${context.modelName}/${details._id}`, 'PUT', item, _updateState );
   };
 
   const handleUpdate = () => {

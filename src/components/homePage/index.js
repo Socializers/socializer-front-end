@@ -7,7 +7,30 @@ import './home.scss';
 
 class Home extends React.Component {
 
-  componentDidMount(){
+  componentDidMount() {
+
+    const header = document.querySelector('header');
+    const sectionOne = document.querySelector('.zero-section');
+
+    const sectionOneOptions = {
+      rootMargin: '-100px 0px 0px 0px',
+    };
+    
+    const sectionOneObserver = new IntersectionObserver(function(
+      entries,
+      sectionOneObserver,
+    ) {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) {
+          header.classList.add('nav-scrolled');
+        } else {
+          header.classList.remove('nav-scrolled');
+        }
+      });
+    },
+    sectionOneOptions);
+    
+    sectionOneObserver.observe(sectionOne);
     
     const faders = document.querySelectorAll('.fade-in');
     const slider2 = document.querySelectorAll('.slide-in-2');
@@ -63,6 +86,13 @@ class Home extends React.Component {
 
     return(
       <>
+        <section className='zero-section'>
+          <div>
+            <img src={require('../images/homepage/social.jpg')} />
+            <h2>Are you Looking for investing in yourself In A Fun Way?</h2>
+          </div>
+        </section>
+
         <section className='first-section'>
           <div className='main-content'>
             <img src={require('../images/homepage/logo.png')} />
@@ -75,9 +105,9 @@ class Home extends React.Component {
           <img className='main-image' src={require('../images/homepage/1.jpg')} />
         </section>
 
-        <section className='second-section fade-in'>
-          <h2>Welcome to Social Club Family</h2>
-          <h6>Here's why our members love our club</h6>
+        <section className='second-section'>
+          <h2 className='fade-in'>Welcome to Social Club Family</h2>
+          <h6 className='fade-in'>Here's why our members love our club</h6>
           <div className='container'>
             <div className='first-card slide-in-2 from-top'>
               <img src={require('../images/homepage/icon1.png')} />
@@ -97,7 +127,7 @@ class Home extends React.Component {
           </div>
         </section>
 
-        <section className='third-section fade-in'>
+        <section className='third-section'>
           <div className='first-card'>
             <div className='slide-in-3 from-left'>
               <h2>Section 1</h2>

@@ -1,0 +1,37 @@
+.uploader {
+  // border: solid;
+  display: flex;
+  flex-direction: row;
+  margin-left: 10%;
+  margin-top: 1%;
+  width: 80%;
+
+  input:first-of-type {
+    background-color: rgba(0, 0, 0, 0.2);
+    border: solid;
+    border-radius: 1em;
+    font-size: 1em;
+    height: 2.5em;
+    margin-top: 5%;
+    margin-left: 3%;
+    width: 40%;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  input:last-of-type {
+    background-color: rgba(0, 0, 0, 0.2);
+    border: solid;
+    border-radius: 1em;
+    font-size: 1em;
+    height: 2.9em;
+    margin-top: 5%;
+    margin-left: 3%;
+    width: 40%;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
