@@ -14,8 +14,8 @@ import Signup from './auth/signup.js';
 import Footer from './footer';
 
 // import './app.scss';
-import UserProvider from '../context/userProvider.js'
-import FacebookLoggedIn from '../components/login/facebook.js'
+// import UserProvider from '../context/userProvider.js'
+// import FacebookLoggedIn from '../components/login/facebook.js'
 
 export default function App() {
   return (
@@ -35,9 +35,9 @@ export default function App() {
         <Route exact path='/app' render={() => <Model />}></Route>
         <Footer />
       </ModelProvider>
-      <UserProvider>
-        <Route path='/loginToFacebook' component={FacebookLoggedIn} />
-      </UserProvider>
+      {/* <UserProvider> */}
+        {/* <Route path='/loginToFacebook' component={FacebookLoggedIn} /> */}
+      {/* </UserProvider> */}
     </>
   );
 }

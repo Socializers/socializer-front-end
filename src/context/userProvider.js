@@ -5,7 +5,7 @@ const API = 'http://localhost:3030';
 const UserProvider = ({ children }) => {
     const [user, setUser] = useState({});
     useEffect(() => {
-        fetch(`${API}/auth/facebook/callback`, {
+        fetch(`${API}/auth/facebook`, {
             method: 'get',
             mode: 'no-cors',
             cache: 'no-cache',

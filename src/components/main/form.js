@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 
 import React, {useState, useEffect, useContext} from 'react';
+import './form.scss'
 import { FaFeather, FaSave } from 'react-icons/fa';
 import Loader from 'react-loader-spinner';
 import $ from 'jquery';
@@ -104,7 +105,7 @@ function Cool (props){
 
   return (
     <>
-      <section>
+      <section id='form'>
         <div className='modal-form'>
           <form id='addForm' onSubmit={addItem}>
             <input name="name" placeholder="item name" onChange={handleInputChange} required />
@@ -160,7 +161,10 @@ function Cool (props){
                     }
                   })}
                 </ul>
-                <input id='newField' /> <button type='button' onClick={handleNewField}>add field</button>
+                <label>  Add new field
+                <input id='newField' />
+                </label>
+                <button type='button' onClick={handleNewField}>add field</button>
                 <button><FaSave /></button>
               </form>
             </If>
