@@ -14,25 +14,30 @@ import Signup from './auth/signup.js';
 import Footer from './footer';
 
 // import './app.scss';
+import UserProvider from '../context/userProvider.js'
+import FacebookLoggedIn from '../components/login/facebook.js'
 
 export default function App() {
-  return(
+  return (
     <>
       <ModelProvider>
         <Header />
-        <Route exact path='/' render={()=>< Home/>} />
-        <Route exact path='/form' render={()=><Form /> }></Route>
+        <Route exact path='/' render={() => < Home />} />
+        <Route exact path='/form' render={() => <Form />}></Route>
         <LoginContext>
-          <Route exact path='/login' render={() => 
+          <Route exact path='/login' render={() =>
             <Login />
           }></Route>
-          <Route exact path='/signup' render={() => 
+          <Route exact path='/signup' render={() =>
             <Signup />
           }></Route>
-        </LoginContext> 
+        </LoginContext>
         <Route exact path='/app' render={() => <Model />}></Route>
         <Footer />
       </ModelProvider>
+      <UserProvider>
+        <Route path='/loginToFacebook' component={FacebookLoggedIn} />
+      </UserProvider>
     </>
   );
 }
