@@ -18,16 +18,16 @@ export default function Header() {
 
         <nav className='main'>
           <ul>
-            <Link to="/"><li> Home </li></Link>
-            <Link to="/app"><li> Check App</li></Link>
-            <Link to="/form"><li>Form</li></Link>
+            <li><Link to="/"> Home </Link></li>
+            <li><Link to="/app"> Dashboard</Link></li>
+            <li><Link to="/form"> Form </Link></li>
           </ul>
         </nav>
 
         <nav className='account'>
           <ul>
-            <Link to="/login"><li> Signin </li></Link>
-            <Link to="/signup"><li> Signup </li></Link>
+            <li><Link to="/login">Signin</Link></li>
+            <li><Link to="/signup">Signup</Link></li>
           </ul>
         </nav>
 

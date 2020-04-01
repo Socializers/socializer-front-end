@@ -13,7 +13,7 @@ import Signup from './auth/signup.js';
 // import Auth from './auth/auth.js';
 import Footer from './footer';
 
-// import './app.scss';
+import './app.scss';
 
 export default function App() {
   return(

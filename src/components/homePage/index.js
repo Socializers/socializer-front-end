@@ -109,17 +109,17 @@ class Home extends React.Component {
           <h2 className='fade-in'>Welcome to Social Club Family</h2>
           <h6 className='fade-in'>Here's why our members love our club</h6>
           <div className='container'>
-            <div className='first-card slide-in-2 from-top'>
+            <div className='card slide-in-2 from-top'>
               <img src={require('../images/homepage/icon1.png')} />
               <h3>knowledge Filled With Enjoyment</h3>
               <p>This is how you are going to learn new things in your life but NOT in a boring way. In pur club, we make sure to makes joyment while you learn anything.</p>
             </div>
-            <div className='second-card slide-in-2 from-bottom'>
+            <div className='card slide-in-2 from-bottom'>
               <img src={require('../images/homepage/icon2.png')} />
               <h3>Lifetime Access</h3>
               <p>By signing up in our club, you will be a permenant which means you can access the content and see your edits whenever you want and at the comfort of your home.</p>
             </div>
-            <div className='third-card slide-in-2 from-top'>
+            <div className='card slide-in-2 from-top'>
               <img src={require('../images/homepage/icon3.png')} />
               <h3>Meeting Online</h3>
               <p>Sometimes you have such a great skill that you want to share with someone who you want to learn something from and to make this super smooth you can now meet each other online with a click of button.</p>
@@ -146,7 +146,7 @@ class Home extends React.Component {
             </div>
             <span className='slide-in-3 from-left'><img src={require('../images/homepage/science.jpg')} /></span>
           </div>
-          <div className='third-card'>
+          <div className='first-card'>
             <div className='slide-in-3 from-left'>
               <h2>Section 3</h2>
               <h3>Languages</h3>

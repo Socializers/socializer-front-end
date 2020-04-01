@@ -9,6 +9,9 @@ import { When } from '../if';
 import Modal from '../modal';
 import { ModelContext } from '../../context/modal.js';
 import ConfirmButton from './confirmButton.js';
+
+import './form.scss';
+
 const If = props => {
   return props.condition ? props.children : null;
 };
@@ -23,6 +26,54 @@ function Cool (props){
   const[details, setDetails] = useState({});
   const[showField, setShowField] = useState(false);
   useFetch(`${ourAPI}/${context.modelName}`, {}, setModalList);
+
+  useEffect (() => {
+    const header = document.querySelector('header');
+    const sectionOne = document.querySelector('.zero-section-form');
+
+    const sectionOneOptions = {
+      rootMargin: '-70px 0px 0px 0px',
+    };
+
+    const sectionOneObserver = new IntersectionObserver(function(
+      entries,
+      sectionOneObserver,
+    ) {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) {
+          header.classList.add('nav-scrolled');
+        } else {
+          header.classList.remove('nav-scrolled');
+        }
+      });
+    },
+    sectionOneOptions);
+    
+    sectionOneObserver.observe(sectionOne);
+
+    const slider = document.querySelectorAll('.slide-in');
+
+    const appearOptions = {
+      threshold: 0,
+      rootMargin: '0px 0px -50px 0px',
+    };
+
+    const appearOnScroll = new IntersectionObserver((entries, appearOnScroll) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) {
+          return;
+        } else {
+          entry.target.classList.add('appear');
+          appearOnScroll.unobserve(entry.target);
+        }
+      });
+    }, appearOptions);
+
+    slider.forEach(slider => {
+      appearOnScroll.observe(slider);
+    });
+
+  });
 
   const handleInputChange = e => {
     setItem({...item, [e.target.name]: e.target.value});
@@ -90,11 +141,13 @@ function Cool (props){
   };
 
   const handleNewField = () => {
-    $('#updateForm ul').append(`<li>${$('#newField').val()}: <input class='newInput' name=${$('#newField').val()} /></li>`);
-    $('.newInput').on('change', handleInputChange);
-
     $('#newAddField').before(`<input class='newAddInput' name=${$('#newAddField').val()} placeholder=${$('#newAddField').val()} />`);
     $('.newAddInput').on('change', handleInputChange);
+  };
+
+  const handleNewFieldUpdate = () =>{
+    $('#updateForm ul').append(`<li>${$('#newField').val()}: <input class='newInput' name=${$('#newField').val()} /></li>`);
+    $('.newInput').on('change', handleInputChange);
   };
   
   const toggleDetails = id => {
@@ -104,12 +157,15 @@ function Cool (props){
 
   return (
     <>
-      <section>
-        <div className='modal-form'>
+      <section className='zero-section-form'></section>
+
+      <section className='first-section-form'>
+        <div className='model-form'>
           <form id='addForm' onSubmit={addItem}>
             <input name="name" placeholder="item name" onChange={handleInputChange} required />
             <input name="des" placeholder="item des" onChange={handleInputChange} required />
-            <input id='newAddField' placeholder='new field' /> <button type='button' onClick={handleNewField}>add field</button>
+            <input id='newAddField' placeholder='new field' /> 
+            <button className='newFieldButton' type='button' onClick={handleNewField}>add field</button>
             <button>Add</button>
           </form>
         </div>
@@ -117,11 +173,8 @@ function Cool (props){
         <div className='items'>
           <ul>
             {modalList.map(item => (
-              <li key={item._id} >
-                {item.name}
-                <button onClick={() => toggleDetails(item._id)} >
-                  Details
-                </button>
+              <li className='from-right slide-in' key={item._id} >
+                <p onClick={() => toggleDetails(item._id)}>{item.name}</p>
                 <ConfirmButton
                   dialog={['Delete', 'Are You Sure?', 'Once more to delete']}
                   action={() => deleteItem(item._id)}
@@ -133,11 +186,11 @@ function Cool (props){
       </section>
 
       <When condition={showDetails}>
-        <Modal title="To Do Item" close={toggleDetails}>
-          <div className="todo-details">
+        <Modal title="Item Details" close={toggleDetails}>
+          <div className="item-details">
             <If condition={!showField}>
               <div className="item">
-                {details.name} <FaFeather onClick={handleUpdate} />
+                {details.name} <FaFeather className='feather' onClick={handleUpdate} />
               </div>
               <ul>
                 {Object.keys(details).map((property,idx) => {
@@ -151,6 +204,7 @@ function Cool (props){
             </If>
             <If condition={showField}>
               <form id='updateForm' onSubmit={updateItem}>
+                <button className='save'><FaSave /></button>
                 <ul>
                   {Object.keys(details).map((property,idx) => {
                     if(property !== '__v' && property !== '_id'){
@@ -160,8 +214,7 @@ function Cool (props){
                     }
                   })}
                 </ul>
-                <input id='newField' /> <button type='button' onClick={handleNewField}>add field</button>
-                <button><FaSave /></button>
+                <input placeholder='New Field ? Name It PLZ' id='newField' /> <button className='new' type='button' onClick={handleNewFieldUpdate}>add field</button>
               </form>
             </If>
           </div>

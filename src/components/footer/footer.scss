@@ -1,3 +1,22 @@
 footer {
-    border: solid;
+  background-color: rgb(152, 209, 162);
+  border: solid;
+  height: 100px;
+  section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    div {
+    //   border: solid;
+      height: 100%;
+      line-height: 200%;
+      text-align: center;
+      width: 30%;
+    }
+    .icon {
+      font-size: 2em;
+      padding: 5%;
+    }
+  }
 }

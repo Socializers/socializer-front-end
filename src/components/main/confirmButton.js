@@ -44,16 +44,21 @@ export default class ConfirmButton extends React.Component {
 }
 
 const Button = styled.button`
-  background: #e54b4b;
+  background: #d41a33;
   border-radius: 5px;
   border: none;
   color: white;
   font-size: 1rem;
+  height:50px;
   margin-top: 1rem;
   text-transform: uppercase;
   font-weight: 900;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  width: 35%;
+  &:hover {
+    cursor: pointer;
+  }
   ${({ level }) => {
     if (level === 1)
       return `

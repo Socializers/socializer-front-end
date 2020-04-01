@@ -1,46 +1,50 @@
 header {
-  background-color: rgba(220, 230, 235, 0);
-  // border: solid;
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 70px;
+  height: 60px;
   width: 100%;
   z-index: 99;
 
   h1 {
     // border: solid;
     color: yellowgreen;
-    font-family: 'ZCOOL XiaoWei', serif;
-    font-size: 2.7em;
+    font-family: "ZCOOL XiaoWei", serif;
+    font-size: 3em;
     font-style: italic;
-    position: relative;
-    top: -30%;
-    text-align: center;
+    float: left;
+    height: 100%;
+    padding-left: 2%;
     width: 20%;
   }
 
   .main {
     // border: solid;
     font-size: 1.3em;
-    position: absolute;
-    top: 5%;
-    left: 20%;
+    float: left;
+    height: 100%;
     width: 40%;
 
-    a {
-      text-decoration: none;
-      color: white;
+    ul {
+      // border: solid;
+      position: absolute;
+      bottom: 35%;
+      width: 40%;
 
       li {
         // border: solid;
         display: inline;
         margin: 0% 1%;
-        padding: 12px 13px;
+        padding: 5px 10px;
+
+        a {
+          color: white;
+          text-decoration: none;
+        }
 
         &:hover {
           border-bottom: solid 1px;
+          color: rgb(139, 200, 218);
+        }
+        &:hover > a {
           color: rgb(139, 200, 218);
         }
       }
@@ -50,37 +54,51 @@ header {
   .account {
     // border: solid;
     font-size: 1.3em;
-    position: absolute;
-    top: 5%;
-    left: 65%;
+    float: left;
     text-align: center;
     width: 30%;
 
-    a {
-      text-decoration: none;
-      color: white;
+    ul {
+      // border: solid;
+      position: absolute;
+      bottom: 35%;
+      left: 70%;
+      width: 30%;
 
       li {
-        border: solid 1px;
-        border-radius: 2em;
+        border: solid rgb(46, 80, 90) 2px;
+        border-radius: 0.5em;
         display: inline;
-        margin: 0% 5%;
-        padding: 12px 13px;
+        margin: 0% 2%;
+        padding: 2.5% 2.5%;
+
+        a {
+          // border: solid;
+          color: white;
+          text-decoration: none;
+        }
 
         &:hover {
           background-color: rgb(102, 150, 165);
+        }
+
+        &:hover > a {
           color: black;
         }
       }
-    }
-    a:nth-of-type(2) {
-      color: white;
 
-      li {
+      li:nth-of-type(2) {
         background-color: rgb(46, 80, 90);
+
+        a {
+          color: white;
+        }
 
         &:hover {
           background-color: rgb(102, 150, 165);
+        }
+
+        &:hover > a {
           color: black;
         }
       }
@@ -90,7 +108,6 @@ header {
 
 .nav-scrolled {
   color: #333;
-  --text-inverse: #502fbe;
   background-image: linear-gradient(to right, rgb(46, 80, 90), rgb(120, 202, 82));
   box-shadow: 0 3px 20px rgba(0, 0, 0, 0.2);
 }
