@@ -1,7 +1,10 @@
 /* eslint-disable no-unused-vars */
 
 import React from 'react';
+import { FaGoogle, FaFacebook, FaGithub, FaInstagram, FaTwitter, FaLinkedin } from 'react-icons/fa';
+
 import { LoginContext } from './context.js';
+import './login.scss';
 
 const If = props => {
   return props.condition ? props.children : null;
@@ -34,7 +37,31 @@ class Signup extends React.Component {
     }
 
     componentDidMount() {
+      
+      
+      const header = document.querySelector('header');
+      const sectionOne = document.querySelector('.zero-section-model');
+
+      const sectionOneOptions = {
+        rootMargin: '-70px 0px 0px 0px',
+      };
+
+      const sectionOneObserver = new IntersectionObserver(function(
+        entries,
+        sectionOneObserver,
+      ) {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) {
+            header.classList.add('nav-scrolled');
+          } else {
+            header.classList.remove('nav-scrolled');
+          }
+        });
+      },
+      sectionOneOptions);
     
+      sectionOneObserver.observe(sectionOne);
+
       let BASEURL = 'https://accounts.google.com/o/oauth2/v2/auth';
       
       let queryObject = {
@@ -57,19 +84,29 @@ class Signup extends React.Component {
     render() {
       return (
         <>
-          <If condition={this.context.loggedIn}>
-            <button onClick={this.context.logout}>Log Out!</button>
-          </If>
-          
-          <If condition={!this.context.loggedIn}>
-            <form onSubmit={this.handleSubmit}>
-              <input name='username' onChange={this.handleChange} />
-              <input name='password' onChange={this.handleChange} />
-              <button>Signup!</button>
-            </form>
+          <section className='zero-section-model'></section>
 
-            <a onLoad={this.handleGoogleInfo} onClick={this.handleGoogleSubmit} id='google'>Signup with Google</a>
-          </If>
+          <section className='first-section-signin'>
+            <If condition={this.context.loggedIn}>
+              <button className='out' onClick={this.context.logout}>Log Out!</button>
+            </If>
+          
+            <If condition={!this.context.loggedIn}>
+              <form onSubmit={this.handleSubmit}>
+                <input name='username' onChange={this.handleChange} />
+                <input name='password' onChange={this.handleChange} />
+                <button>Signup!</button>
+              </form>
+              <div className='auth'>
+                <a onLoad={this.handleGoogleInfo} onClick={this.handleGoogleSubmit} id='google'><FaGoogle/></a>
+                <a href='https://www.facebook.com/' target='_blank'><FaFacebook/></a>
+                <a href='http://www.github.com/' target='_blank'><FaGithub/></a>
+                <a href='https://twitter.com/' target='_blank'><FaTwitter/></a>
+                <a href='https://www.linkedin.com/' target='_blank'><FaLinkedin/></a>
+                <a href='https://www.instagram.com' target='_blank'><FaInstagram/></a>
+              </div>
+            </If>
+          </section>
         </>
       );
     }

@@ -1,7 +1,9 @@
 /* eslint-disable no-unused-vars */
 
 import React from 'react';
+
 import { LoginContext } from './context.js';
+import './login.scss';
 
 const If = props => {
   return props.condition ? props.children : null;
@@ -28,20 +30,53 @@ class Login extends React.Component {
       e.target.reset();
     }
 
+    componentDidMount () {
+      
+      const header = document.querySelector('header');
+      const sectionOne = document.querySelector('.zero-section-model');
+
+      const sectionOneOptions = {
+        rootMargin: '-70px 0px 0px 0px',
+      };
+
+      const sectionOneObserver = new IntersectionObserver(function(
+        entries,
+        sectionOneObserver,
+      ) {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) {
+            header.classList.add('nav-scrolled');
+          } else {
+            header.classList.remove('nav-scrolled');
+          }
+        });
+      },
+      sectionOneOptions);
+    
+      sectionOneObserver.observe(sectionOne);
+    }
+
     render() {
       return (
         <>
-          <If condition={this.context.loggedIn}>
-            <button onClick={this.context.logout}>Log Out!</button>
-          </If>
+          <section className='zero-section-model'></section>
 
-          <If condition={!this.context.loggedIn}>
-            <form onSubmit={this.handleSubmit}>
-              <input name='username' onChange={this.handleChange} />
-              <input name='password' onChange={this.handleChange} />
-              <button>Log In!</button>
-            </form>
-          </If>
+          <section className='first-section-signin'>
+            <If condition={this.context.loggedIn}>
+              <button onClick={this.context.logout}>Log Out!</button>
+            </If>
+
+            <If condition={!this.context.loggedIn}>
+              <form onSubmit={this.handleSubmit}>
+                <input name='username' onChange={this.handleChange} />
+                <input name='password' onChange={this.handleChange} />
+                <button>Log In!</button>
+              </form>
+            </If>
+            <div className='auth'>
+              
+            </div>
+          </section>
         </>
       );
     }
