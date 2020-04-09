@@ -2,7 +2,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 
-import Header from './header';
+import Header from './header/';
 import Home from './homePage/';
 import ModelProvider from '../context/modal.js';
 import Model from './main/model.js';

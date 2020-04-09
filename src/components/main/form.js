@@ -20,12 +20,12 @@ const ourAPI = 'http://localhost:3030/api/v1';
 
 function Cool (props){
   const context = useContext(ModelContext);
-  const[modalList, setModalList] = useState([]);
+  const[itemsList, setItemsList] = useState([]);
   const[item, setItem] = useState({});
   const[showDetails, setShowDetails] = useState(false);
   const[details, setDetails] = useState({});
   const[showField, setShowField] = useState(false);
-  useFetch(`${ourAPI}/${context.modelName}`, {}, setModalList);
+  useFetch(`${ourAPI}/${context.modelName}`, {}, setItemsList);
 
   useEffect (() => {
     const header = document.querySelector('header');
@@ -105,7 +105,7 @@ function Cool (props){
     });
 
     const _updateState = newItem => 
-      setModalList([...modalList, newItem]);
+      setItemsList([...itemsList, newItem]);
 
     callAPI(`${ourAPI}/${context.modelName}`, 'POST', item, _updateState);
   };
@@ -113,7 +113,7 @@ function Cool (props){
   const deleteItem = id => {
 
     const _updateState = () => {
-      setModalList( modalList.filter(item => item._id !== id));
+      setItemsList( itemsList.filter(item => item._id !== id));
     };
 
     callAPI(`${ourAPI}/${context.modelName}/${id}`, 'DELETE', undefined, _updateState);
@@ -131,7 +131,7 @@ function Cool (props){
       setItem({...item, [oneProp.name]: oneProp.value});
     });
 
-    const _updateState = newItem => setModalList(modalList.map(item => item._id === newItem._id ? newItem : item));
+    const _updateState = newItem => setItemsList(itemsList.map(item => item._id === newItem._id ? newItem : item));
 
     callAPI(`${ourAPI}/${context.modelName}/${details._id}`, 'PUT', item, _updateState );
   };
@@ -152,7 +152,7 @@ function Cool (props){
   
   const toggleDetails = id => {
     setShowDetails(!showDetails);
-    setDetails(modalList.filter(item => item._id === id)[0] || {});
+    setDetails(itemsList.filter(item => item._id === id)[0] || {});
   };
 
   return (
@@ -172,7 +172,7 @@ function Cool (props){
 
         <div className='items'>
           <ul>
-            {modalList.map(item => (
+            {itemsList.map(item => (
               <li className='from-right slide-in' key={item._id} >
                 <p onClick={() => toggleDetails(item._id)}>{item.name}</p>
                 <ConfirmButton

@@ -5,13 +5,19 @@ import { Route, Redirect, Link } from 'react-router-dom';
 import $ from 'jquery';
 
 import { ModelContext } from '../../context/modal.js';
+import useFetch from '../hooks/useFetch.js';
 import FileUpload from '../fileUpload';
 import './model.scss';
 
 function Model(props) {
   const context = useContext(ModelContext);
+  const[modelList, setModelList] = useState([]);
+  useFetch('http://localhost:3030/api/v1/general', {}, setModelList);
+
 
   useEffect(() => {
+
+    console.log('blabal', modelList);
 
     const header = document.querySelector('header');
     const sectionOne = document.querySelector('.zero-section-model');
@@ -70,40 +76,44 @@ function Model(props) {
     return <Redirect to='/form'/>;
   };
 
-  const callAPI = (modelName) => {
-    return fetch('http://localhost:3030/schemas', {
+  const callAPI = (url, method = 'get', body, handler, errorHandler) => {
+    return fetch(url, {
+      method: method,
+      mode: 'cors',
+      cache: 'no-cache',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+      }),
+      body: body ? JSON.stringify(body) : undefined,
+    })
+      .then(response => response.json())
+      .then(data => typeof handler === 'function' ? handler(data) : null)
+      .catch( e => typeof errorHandler === 'function' ? errorHandler(e) : console.error(e));
+  };
+
+  const createModel = (name, des) => {
+
+    console.log('name',name);
+    console.log('des',des);
+
+    fetch('http://localhost:3030/schemas', {
       method: 'POST',
       mode: 'cors',
       cache: 'no-cache',
       headers: new Headers({
         'Content-Type': 'application/json',
       }),
-      body: JSON.stringify({model: modelName}),
+      body: JSON.stringify({model: name}),
     });
-  };
 
-  const createCard = () => {
-    console.log('here', context.modelName);
-    $('.second-section-model').append(`
-      <div class='card slide-in from-left'>
-        <a href='/form'>
-          <div>
-            <div>
-              <h3>${context.modelName}</h3>
-              <p>${context.modelDesc}</p>
-            </div>
-${ context.uploadedFile.fileName !== undefined ? 
-    ( `<div class='image'><img alt=${context.uploadedFile.fileName} src=${require(`../images/uploads/${context.uploadedFile.fileName}`)} /></div>` ) 
-    : `<div class='image'><img alt='null' src=${require('../images/null.jpg')} /></div>`
-}
-            </div>
-        </a>
-      </div>`,
-    );
-    // $('.card a > div:first-of-type').attr('class', 'value');
-    $('.card a > div:first-of-type').on('click', () => context.changeModelName(context.modelName));
-  };
+    const _updateState = newItem => 
+      setModelList([...modelList, newItem]);
+
+    callAPI(`http://localhost:3030/api/v1/general`, 'POST', {name,des}, _updateState);
+
   
+  };
+ 
   return (
     <>
       <section className='zero-section-model'></section>
@@ -114,69 +124,32 @@ ${ context.uploadedFile.fileName !== undefined ?
       </section>
 
       <section className='second-section-model'>
-        <div className='card slide-in from-left'>
-          <Link to='/form'>
-            <div onClick={()=> context.changeModelName('developers')}>
-              <div>
-                <h3>Web Development</h3>
-                <p>A whole section about web development and how to become a professional softwaere engineer by watching our courses in this field.</p>
+        {modelList.map(model => (
+          <div className='card slide-in from-left'>
+            <Link to='/form'>
+              <div onClick={()=> context.changeModelName(model.name)}>
+                <div>
+                  <h3>{model.name}</h3>
+                  <p>{model.des}</p>
+                </div>
+                <div className='image'><img alt={model.name} src={require('../images/homepage/developers.jpg')} /></div>
               </div>
-              <div className='image'><img alt='development' src={require('../images/homepage/developer.jpg')} /></div>
-            </div>
-          </Link>
-        </div>
+            </Link>
+          </div>
+        ))}
 
-        <div className='card slide-in from-left'>
-          <Link to='/form'>
-            <div onClick={()=> context.changeModelName('science')}>
-              <div>
-                <h3>Science</h3>
-                <p>Learn new languages like English and Arabic</p>
-              </div>
-              <div className='image'><img alt='science' src={require('../images/homepage/science.jpg')} /></div>
-            </div>
-          </Link>
-        </div>
-
-        <div className='card slide-in from-left'>
-          <Link to='/form'>
-            <div onClick={()=> context.changeModelName('languages')}>
-              <div>
-                <h3>Languages</h3>
-                <p>Learn new languages like English and Arabic.</p>
-              </div>
-              <div className='image'><img alt='languages' src={require('../images/homepage/languages.jpg')} /></div>
-            </div>
-          </Link>
-        </div>
-        
-        <div className='card slide-in from-left'>
-          <Link to='/form'>
-            <div onClick={()=> context.changeModelName('anime')}>
-              <div>
-                <h3>Anime</h3>
-                <p>Watch animes in way that will entertain you.</p>
-              </div>
-              <div className='image'><img alt='anime' src={require('../images/homepage/anime.jpg')} /></div>
-            </div>
-          </Link>
-        </div>
       </section>
 
       <section className='third-section-model'>
         <div className='fade-in'>
           <h4>In case you want to add any section that you think it is valuable to our club just give it a name and hit the button below</h4>
-          <form className='model-form' onSubmit={submitHandler}>
+          <form className='model-form' onSubmit={() => createModel(context.modelName, context.modelDesc)}>
             <div>
               <input placeholder='Your Model Name' required onChange={e => context.changeModelName(e.target.value)} />
               <textarea placeholder='Please fill this with a brief desription about the model that you wanna create' required onChange={e => context.changeModelDesc(e.target.value)} />
             </div>
             <FileUpload />
-            <button onClick={()=> {
-              callAPI(context.modelName);
-              createCard();
-            // window.location.href='/form';
-            }} type='button'> Create Model </button>
+            <button> Create Model </button>
           </form>
         </div>
       </section>
