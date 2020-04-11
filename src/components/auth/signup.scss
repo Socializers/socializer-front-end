@@ -2,7 +2,7 @@
     height: 60px;
 }
 
-.auth-box {
+.auth-box-up {
     -webkit-box-shadow: 0 0.125rem 0.8rem rgba(0, 0, 0, 0.5) !important;
     box-shadow: 0 0.125rem 0.8rem rgba(0, 0, 0, 0.5) !important;
 
@@ -155,7 +155,7 @@
     }
 }
 
-.box-color {
+.box-color-up {
     background-image: url("https://fintechzoom.com/wp-content/uploads/2020/01/Fintech-News-Today-01.20.jpg");
     background-attachment: fixed;
     background-repeat: no-repeat;
@@ -167,7 +167,7 @@
     align-items: center;
     position: absolute;
     top: 110px;
-    left: 50%;
+    left: 20%;
     min-height: 480px;
     transition: left 1s ease-out;
     width: 30%;
@@ -191,8 +191,8 @@
         cursor: pointer;
     }
 
-    .login-btn,
-    .title2 {
+    .register-btn,
+    .title {
         display: none;
     }
 

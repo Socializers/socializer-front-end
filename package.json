@@ -23,6 +23,7 @@
   "dependencies": {
     "animate.css": "^3.7.2",
     "axios": "^0.19.2",
+    "hover.css": "^2.3.2",
     "jquery": "^3.4.1",
     "jsonwebtoken": "^8.5.1",
     "node-sass": "^4.13.1",

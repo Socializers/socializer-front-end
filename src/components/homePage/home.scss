@@ -32,7 +32,7 @@
       color: #ffffff;
       // border: solid;
       font-size: 1.3em;
-      font-family: "Rubik", sans-serif;
+      font-family: "Raleway", sans-serif;
       position: absolute;
       bottom: 35%;
       left: 25%;
@@ -110,7 +110,8 @@
       // border: solid;
       color: #000000;
       font-size: 1.5em;
-      font-family: "Acme", sans-serif;
+      font-family: "Raleway", sans-serif;
+      font-weight: 900;
       margin-top: 5%;
       margin-left: 5%;
       width: 90%;
@@ -123,7 +124,7 @@
 }
 
 .second-section {
-  background-color: rgb(236, 250, 213);
+  background-color: #ecfad5;
   // border: solid;
   position: relative;
   text-align: center;
@@ -188,7 +189,7 @@
   // background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  border: solid;
+  border-top: solid;
   border-bottom: solid rgb(236, 250, 213);
   color: #fff;
   height: 300px;
@@ -198,6 +199,7 @@
     color: #fff;
     font-size: 2.5em;
     font-family: "Rubik", sans-serif;
+    font-weight: 900;
     margin: 5% 0% 2% 0%;
     text-align: center;
   }
@@ -205,7 +207,7 @@
   p {
     color: #fff;
     font-size: 2em;
-    font-family: "Rubik", sans-serif;
+    font-family: "Raleway", sans-serif;
     text-align: center;
   }
 }
@@ -260,7 +262,8 @@
     display: none;
   }
   .content {
-    font-family: "Rubik", sans-serif;
+    font-family: "Raleway", sans-serif;
+    font-weight: 900;
     position: absolute;
     top: 10%;
     left: 0;

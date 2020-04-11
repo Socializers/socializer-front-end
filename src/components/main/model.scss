@@ -3,15 +3,17 @@
 }
 
 .first-section-model {
-  background-color: rgb(218, 246, 223);
+  background-color: #fff;
   // border: solid;
+  font-family: "Rubik", sans-serif;
   text-align: center;
   padding: 1% 0% 0.1% 0%;
 
   h2 {
     // border: solid;
     font-size: 2em;
-    margin: 1% 0%;
+    font-weight: bold;
+    margin: 2% 0%;
   }
 
   p {
@@ -27,57 +29,61 @@
 
 .second-section-model {
   // border: solid;
-  background-color: rgb(218, 246, 223);
+  background-color: #fff;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
 
   .card {
-    background-image: linear-gradient(to right, rgb(120, 202, 82), rgb(72, 119, 50));
-    border: solid darkgreen;
+    background-image: linear-gradient(to left, rgb(218, 248, 169), yellowgreen);
+    box-shadow: gray 5px 5px 5px;
     border-radius: 5px;
     margin-bottom: 3%;
     width: 30%;
-    // transition: transform 800ms;
 
     a {
       text-decoration: none;
-      color: rgb(105, 3, 66);
+      color: rgb(0, 0, 0);
     }
 
     a > div:first-of-type {
-      border: rgb(41, 1, 1) solid 2px;
+      border: rgb(46, 80, 90) solid 2px;
+      border-radius: 5px;
       display: flex;
       flex-direction: column-reverse;
       justify-content: center;
       margin: 2%;
-      transition: transform 800ms;
+      transition: transform 300ms;
 
       &:hover {
         cursor: pointer;
         transform: scale(0.98);
-        transition: transform 800ms;
+        transition: transform 300ms;
       }
 
       div {
         // border: solid;
         background-color: white;
         height: 100%;
-        margin-top: 5%;
-        width: 100%;
+        margin: 5% 2% 2% 2%;
+        width: 96%;
 
         h3 {
           // border: solid;
           color: black;
-          font-family: "Parisienne", cursive;
+          font-family: "ZCOOL XiaoWei", serif;
           font-size: 2.5em;
+          margin-top: -7%;
+          margin-bottom: 2%;
           text-align: center;
-          margin-top: -5%;
+          text-transform: uppercase;
         }
 
         p {
           // border: solid;
-          font-size: 1.5em;
+          font-size: 1.3em;
+          font-family: "Raleway", sans-serif;
+          font-weight: bold;
           height: 100px;
           padding-left: 5%;
           overflow: auto;
@@ -86,8 +92,8 @@
       .image {
         // border: solid;
         height: 250px;
-        margin: 2% 10%;
-        width: 300px;
+        margin: 2%;
+        // width: 350px;
 
         img {
           height: 100%;
@@ -96,102 +102,213 @@
       }
     }
   }
-
-  .from-left {
-    transform: translateY(-50%);
-    transition: opacity 800ms ease-in, transform 500ms ease-in;
-    opacity: 0;
-  }
-
-  .from-left.appear {
-    transform: translateX(0);
-    opacity: 1;
-  }
 }
 
 .third-section-model {
-  background-color: rgb(218, 246, 223);
-  padding: 1%;
+  background-color: rgb(236, 250, 213);
+  border: solid rgb(236, 250, 213);
+  position: relative;
+  height: 500px;
 
-  div {
-    background-color: white;
-    border: solid rgb(32, 100, 0);
-    border-radius: 1em;
-    height: 500px;
-    margin-left: 10%;
-    width: 80%;
+  form {
+    // border: solid;
+    font-family: "Raleway", sans-serif;
+    font-weight: bold;
+    max-height: 300px;
+    position: relative;
+  }
 
-    h4 {
-      // border: solid;
-      font-size: 2em;
-      padding: 2%;
-      text-align: center;
+  p {
+    // border: solid;
+    font-size: 1.8em;
+    font-family: "Rubik", sans-serif;
+    margin-top: 3%;
+    margin-left: 15%;
+    padding: 2%;
+    text-align: center;
+    width: 70%;
+  }
+
+  $background: #112511;
+  $dark: rgb(236, 250, 213);
+  $primary: #415c03;
+
+  input,
+  button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -300%);
+    display: block;
+    width: 70vw;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.5s cubic-bezier(0.4, 0.25, 0.8, 0.3);
+  }
+
+  input {
+    padding: 0.25rem 0;
+    border: 0;
+    border-bottom: 1px solid $primary;
+    outline: 0;
+    background: transparent;
+    color: #5c6d37;
+    font-size: 2rem;
+    line-height: 4rem;
+    letter-spacing: 0.125rem;
+    transition: all 0.5s cubic-bezier(0.4, 0.25, 0.8, 0.3);
+  }
+
+  input::selection {
+    background: rgba($primary, 0.25);
+  }
+
+  button,
+  .signup-button {
+    padding: 0.25em 0;
+    border: 0;
+    outline: 0;
+    background-image: linear-gradient(to left,yellowgreen, rgb(218, 248, 169), yellowgreen);
+    color: rgba(#000, 0.85);
+    font-size: 2rem;
+    line-height: 3.6rem;
+    letter-spacing: 0.0625rem;
+    box-shadow: 0 3px 5px 1px rgba(#000, 0.25);
+    text-shadow: 0 -2px 0 rgba(#000, 0.25), 0 1px 0 rgba(#fff, 0.2);
+  }
+
+  button:hover {
+    cursor: pointer;
+  }
+
+  input:focus,
+  button:focus {
+    opacity: 1;
+    transform: translate(-50%, -100%);
+    pointer-events: auto;
+    transition: all 0.4s cubic-bezier(0.1, 0.45, 0.1, 0.85) 0.5s;
+    z-index: 10;
+  }
+
+  input:focus ~ input,
+  input:focus ~ button {
+    transform: translate(-50%, 0%);
+    transition: all 0.5s ease-in;
+  }
+  input:focus ~ label .label-text {
+    transform: translate(-50%, 300%);
+    transition: all 0.5s ease-in;
+  }
+  input:focus ~ .tip {
+    opacity: 1;
+  }
+  input:focus ~ .signup-button,
+  button:focus ~ .signup-button {
+    opacity: 0;
+  }
+
+  input:focus + label .label-text {
+    opacity: 1;
+    transform: translate(-50%, -100%);
+    transition: all 0.3s cubic-bezier(0.1, 0.45, 0.1, 0.85) 0.4s;
+  }
+  input:focus + label .nav-dot:before {
+    background: darken($primary, 5%);
+    box-shadow: 0 0 0 0.15rem $dark, 0 0 0.05rem 0.26rem $primary;
+  }
+
+  .tip {
+    position: absolute;
+    top: 50%;
+    left: 38%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    opacity: 0;
+    color: #000;
+    font-size: 0.875rem;
+    font-weight: 300;
+    letter-spacing: 0.125rem;
+    text-transform: uppercase;
+    text-align: right;
+    transition: opacity 0.25s 0.5s;
+  }
+
+  .signup-button,
+  .signup-button-trigger {
+    font-family: "Raleway", sans-serif;
+    font-weight: bold;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    width: 70vw;
+    padding: 0.25rem 0;
+    line-height: 3.6rem;
+    text-align: center;
+    pointer-events: none;
+    cursor: pointer;
+    transition: opacity 0.4s 0.3s;
+  }
+
+  .signup-button-trigger {
+    opacity: 0;
+    pointer-events: auto;
+  }
+
+  .label-text {
+    position: absolute;
+    top: calc(50% - 4rem);
+    left: 50%;
+    transform: translate(-50%, -300%);
+    width: 70vw;
+    padding: 3.125rem 0 1.5rem;
+    text-transform: uppercase;
+    color: rgb(0, 0, 0);
+    opacity: 0;
+    font-size: 1.5rem;
+    font-family: "Raleway", sans-serif;
+    font-weight: bolder;
+    letter-spacing: 0.125rem;
+    pointer-events: none;
+    transition: all 0.4s cubic-bezier(0.4, 0.25, 0.8, 0.3) 0.05s;
+  }
+
+  .nav-dot {
+    cursor: pointer;
+    position: absolute;
+    padding: 0.625rem 1.25rem 0.625rem 0.625rem;
+    top: 65%;
+    right: 1.25rem;
+    &:before {
+      content: "";
+      display: inline-block;
+      border-radius: 50%;
+      width: 0.375rem;
+      height: 0.375rem;
+      margin-right: 0.625rem;
+      position: absolute;
+      background-color: lighten($background, 3%);
+      border: 0;
+      transition: all 0.25s;
     }
-
-    .model-form {
-      // border: solid;
-      display: flex;
-      flex-direction: column;
-      height: 50%;
-      margin-left: 15%;
-      width: 70%;
-
-      div {
-        border: none;
-        display: flex;
-        flex-direction: column;
-        margin: 2% 10%;
-        width: 80%;
-
-        input {
-          background: rgb(200, 245, 177);
-          border: none;
-          border-radius: 1em;
-          color: rgb(49, 32, 0);
-          font-size: 20px;
-          height: 4em;
-          margin-bottom: 3%;
-          padding: 0% 5%;
-          width: 90%;
-
-          &:focus {
-            background: rgba(2, 149, 21, 0.5);
-          }
-        }
-
-        textarea {
-          background: rgb(200, 245, 177);
-          border-radius: 1em;
-          border: none;
-          color: rgb(41, 1, 1);
-          font-size: 20px;
-          padding: 5% 5%;
-          overflow: auto;
-          width: 90%;
-
-          &:focus {
-            background: rgba(2, 149, 21, 0.5);
-          }
-        }
-      }
-
-      button {
-        border: solid;
-        background-color: #faf73dc9;
-        border-radius: 0.5em;
-        color: black;
-        // height: 3em;
-        font-size: 2em;
-        margin-left: 25%;
-        margin-top: 5%;
-        width: 50%;
-
-        &:hover {
-          background-color: #f3ce2b;
-          color: black;
-          cursor: pointer;
-        }
-      }
+    &:hover:before {
+      width: 0.625rem;
+      height: 0.625rem;
+      margin-top: -0.125rem;
+      margin-left: -0.125rem;
+      background-color: darken($primary, 5%);
     }
+  }
+
+  @for $i from 1 through 5 {
+    label[for="input-#{$i}"] .nav-dot {
+      margin-top: -150px + (25 * $i);
+    }
+  }
+
+  form {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
   }
 }
