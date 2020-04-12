@@ -18,7 +18,7 @@ export default function Header() {
 
       <nav className="main-nav">
         <ul className="nav__list">
-          <li class="nav__list-item"><Link to="/" className="nav__link">Home</Link></li>
+          <li className="nav__list-item"><Link to="/" className="nav__link">Home</Link></li>
           <li className="nav__list-item"><a href="#" className="nav__link">About</a></li>
           <li className="nav__list-item"><Link to="/app" className="nav__link">Dashboard</Link></li>
           <li className="nav__list-item"><Link to="/form" className="nav__link">Form</Link></li>

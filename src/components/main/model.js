@@ -98,7 +98,10 @@ function Model(props) {
 
       <section className='second-section-model'>
         {modelList.map(model => (
-          <div className='card wow zoomIn' onClick={() => context.changeModelName(model.name)}>
+          <div className='card wow zoomIn' onClick={() => {
+            context.changeModelName(model.name);
+            context.changeModelImg(model.img_url);
+          }}>
             <Link to='/form'>
               <div>
                 <div>

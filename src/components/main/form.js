@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 
-import React, {useState, useEffect, useContext} from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { FaFeather, FaSave } from 'react-icons/fa';
 import Loader from 'react-loader-spinner';
 import $ from 'jquery';
@@ -10,6 +10,8 @@ import Modal from '../modal';
 import { ModelContext } from '../../context/modal.js';
 import ConfirmButton from './confirmButton.js';
 
+import pic from '../images/homepage/word.jpg';
+
 import './form.scss';
 
 const If = props => {
@@ -18,24 +20,25 @@ const If = props => {
 
 const ourAPI = 'http://localhost:3030/api/v1';
 
-function Cool (props){
+function Cool(props) {
   const context = useContext(ModelContext);
-  const[itemsList, setItemsList] = useState([]);
-  const[item, setItem] = useState({});
-  const[showDetails, setShowDetails] = useState(false);
-  const[details, setDetails] = useState({});
-  const[showField, setShowField] = useState(false);
+  const [itemsList, setItemsList] = useState([]);
+  const [item, setItem] = useState({});
+  const [showDetails, setShowDetails] = useState(false);
+  const [details, setDetails] = useState({});
+  const [showField, setShowField] = useState(false);
   useFetch(`${ourAPI}/${context.modelName}`, {}, setItemsList);
 
-  useEffect (() => {
+  useEffect(() => {
+    console.log('context', context.modelImg);
     const header = document.querySelector('header');
     const sectionOne = document.querySelector('.zero-section-form');
 
     const sectionOneOptions = {
-      rootMargin: '-70px 0px 0px 0px',
+      rootMargin: '-5000px 0px 0px 0px',
     };
 
-    const sectionOneObserver = new IntersectionObserver(function(
+    const sectionOneObserver = new IntersectionObserver(function (
       entries,
       sectionOneObserver,
     ) {
@@ -46,9 +49,8 @@ function Cool (props){
           header.classList.remove('nav-scrolled');
         }
       });
-    },
-    sectionOneOptions);
-    
+    }, sectionOneOptions);
+
     sectionOneObserver.observe(sectionOne);
 
     const slider = document.querySelectorAll('.slide-in');
@@ -76,7 +78,7 @@ function Cool (props){
   });
 
   const handleInputChange = e => {
-    setItem({...item, [e.target.name]: e.target.value});
+    setItem({ ...item, [e.target.name]: e.target.value });
   };
 
   const callAPI = (url, method = 'get', body, handler, errorHandler) => {
@@ -91,7 +93,7 @@ function Cool (props){
     })
       .then(response => response.json())
       .then(data => typeof handler === 'function' ? handler(data) : null)
-      .catch( e => typeof errorHandler === 'function' ? errorHandler(e) : console.error(e));
+      .catch(e => typeof errorHandler === 'function' ? errorHandler(e) : console.error(e));
   };
 
   const addItem = e => {
@@ -100,11 +102,11 @@ function Cool (props){
 
     const addForm = $('#addForm').serializeArray();
 
-    addForm.forEach( oneProp => {
-      setItem({...item, [oneProp.name]: oneProp.value});
+    addForm.forEach(oneProp => {
+      setItem({ ...item, [oneProp.name]: oneProp.value });
     });
 
-    const _updateState = newItem => 
+    const _updateState = newItem =>
       setItemsList([...itemsList, newItem]);
 
     callAPI(`${ourAPI}/${context.modelName}`, 'POST', item, _updateState);
@@ -113,7 +115,7 @@ function Cool (props){
   const deleteItem = id => {
 
     const _updateState = () => {
-      setItemsList( itemsList.filter(item => item._id !== id));
+      setItemsList(itemsList.filter(item => item._id !== id));
     };
 
     callAPI(`${ourAPI}/${context.modelName}/${id}`, 'DELETE', undefined, _updateState);
@@ -126,14 +128,14 @@ function Cool (props){
     setShowDetails(!showDetails);
 
     const updatedItem = $('#updateForm').serializeArray();
-    
-    updatedItem.forEach( oneProp => {
-      setItem({...item, [oneProp.name]: oneProp.value});
+
+    updatedItem.forEach(oneProp => {
+      setItem({ ...item, [oneProp.name]: oneProp.value });
     });
 
     const _updateState = newItem => setItemsList(itemsList.map(item => item._id === newItem._id ? newItem : item));
 
-    callAPI(`${ourAPI}/${context.modelName}/${details._id}`, 'PUT', item, _updateState );
+    callAPI(`${ourAPI}/${context.modelName}/${details._id}`, 'PUT', item, _updateState);
   };
 
   const handleUpdate = () => {
@@ -145,11 +147,11 @@ function Cool (props){
     $('.newAddInput').on('change', handleInputChange);
   };
 
-  const handleNewFieldUpdate = () =>{
+  const handleNewFieldUpdate = () => {
     $('#updateForm ul').append(`<li>${$('#newField').val()}: <input class='newInput' name=${$('#newField').val()} /></li>`);
     $('.newInput').on('change', handleInputChange);
   };
-  
+
   const toggleDetails = id => {
     setShowDetails(!showDetails);
     setDetails(itemsList.filter(item => item._id === id)[0] || {});
@@ -157,28 +159,50 @@ function Cool (props){
 
   return (
     <>
-      <section className='zero-section-form'></section>
+      <section className='zero-section-form'
+        style={{
+          backgroundImage: `url(${context.modelImg})`,
+          height: '100%',
+          position: 'fixed',
+          width: '100%',
+          zIndex: '-1',
+        }}
+      >
+        <div></div>
+      </section>
 
-      <section className='first-section-form'>
-        <div className='model-form'>
-          <form id='addForm' onSubmit={addItem}>
-            <input name="name" placeholder="item name" onChange={handleInputChange} required />
-            <input name="des" placeholder="item des" onChange={handleInputChange} required />
-            <input id='newAddField' placeholder='new field' /> 
-            <button className='newFieldButton' type='button' onClick={handleNewField}>add field</button>
-            <button>Add</button>
-          </form>
-        </div>
 
+      <section className='second-section-form'>
         <div className='items'>
           <ul>
             {itemsList.map(item => (
-              <li className='from-right slide-in' key={item._id} >
-                <p onClick={() => toggleDetails(item._id)}>{item.name}</p>
-                <ConfirmButton
-                  dialog={['Delete', 'Are You Sure?', 'Once more to delete']}
-                  action={() => deleteItem(item._id)}
-                />
+              <li className="container-cards" key={item._id} >
+                <div className="container-cards-surface container-cards-front">
+                  <div className="container-cards-front-image">
+                    <img src={item.img_url} alt="" />
+                  </div>
+
+                  <div className="container-cards-front-content">
+                    <h2>{item.name}</h2>
+                    <p>{item.des}</p>
+                  </div>
+                  <div className="container-cards-front-label">{context.modelName}</div>
+
+                  <div className="container-cards-front-button">
+                    <button className="flip-btn" onClick={() => toggleDetails(item._id)}>Hover</button>
+                    <ConfirmButton
+                      dialog={['Delete', 'Are You Sure?', 'Once more to delete']}
+                      action={() => deleteItem(item._id)}
+                    />
+                  </div>
+                </div>
+                <div className="container-cards-surface container-cards-back" style={{
+                  backgroundImage: `url(${item.img_url})`,
+                }}>
+                  <div className="container-cards-back-content">
+                    <h2>{item.name}</h2>
+                  </div>
+                </div>
               </li>
             ))}
           </ul>
@@ -193,8 +217,8 @@ function Cool (props){
                 {details.name} <FaFeather className='feather' onClick={handleUpdate} />
               </div>
               <ul>
-                {Object.keys(details).map((property,idx) => {
-                  if(idx > 1 && property !== '__v'){
+                {Object.keys(details).map((property, idx) => {
+                  if (idx > 1 && property !== '__v') {
                     return <li key={idx}>{property}:{' '}
                       <span> {details[property]}</span>
                     </li>;
@@ -206,10 +230,10 @@ function Cool (props){
               <form id='updateForm' onSubmit={updateItem}>
                 <button className='save'><FaSave /></button>
                 <ul>
-                  {Object.keys(details).map((property,idx) => {
-                    if(property !== '__v' && property !== '_id'){
+                  {Object.keys(details).map((property, idx) => {
+                    if (property !== '__v' && property !== '_id') {
                       return <li key={idx}>{property}:{' '}
-                        <input onChange={handleInputChange} name={property} defaultValue={details[property]} /> 
+                        <input onChange={handleInputChange} name={property} defaultValue={details[property]} />
                       </li>;
                     }
                   })}
@@ -220,6 +244,20 @@ function Cool (props){
           </div>
         </Modal>
       </When>
+
+
+      <section className='first-section-form'>
+        <div className='model-form'>
+          <form id='addForm' onSubmit={addItem}>
+            <input name="name" placeholder="name" onChange={handleInputChange} required />
+            <input name="des" placeholder="description" onChange={handleInputChange} required />
+            <input name="img_url" placeholder="img_url" onChange={handleInputChange} required />
+            <input id='newAddField' placeholder='new field' />
+            <button className='newFieldButton' type='button' onClick={handleNewField}>add field</button>
+            <button>Add</button>
+          </form>
+        </div>
+      </section>
     </>
   );
 }

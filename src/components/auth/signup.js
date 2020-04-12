@@ -27,7 +27,14 @@ class Signup extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  handleSubmit = e => {
+  loginHandleSubmit = e => {
+    e.preventDefault();
+    // console.log('__STATE__', this.state);
+    this.context.login(this.state.username, this.state.password);
+    // e.target.reset();
+  }
+
+  signupHandleSubmit = e => {
     e.preventDefault();
     this.context.signup(this.state.username, this.state.password);
     e.target.reset();
@@ -70,10 +77,10 @@ class Signup extends React.Component {
       $('.register-btn').css('display', 'block');
       $('.register-btn').addClass('animated fadeIn');
       $('.box-color-up').css('left', '50%');
-      $('.register').removeClass('animated fadeInLeft');
-      $('.register').addClass('animated fadeOutLeft');
-      $('.login').removeClass('animated fadeOutRight');
-      $('.login').addClass('animated fadeInRight');
+      $('.register').removeClass('animated fadeIn');
+      $('.register').addClass('animated fadeOut');
+      $('.login').removeClass('animated fadeOut');
+      $('.login').addClass('animated fadeIn');
     });
 
     $('.register-btn').on('click', function () {
@@ -84,10 +91,10 @@ class Signup extends React.Component {
       $('.login-btn').addClass('animated fadeIn');
       $('.register-btn').css('display', 'none');
       $('.box-color-up').css('left', '20%');
-      $('.login').removeClass('animated fadeInRight');
-      $('.login').addClass('animated fadeOutRight');
-      $('.register').removeClass('animated fadeOutLeft');
-      $('.register').addClass('animated fadeInLeft');
+      $('.login').removeClass('animated fadeIn');
+      $('.login').addClass('animated fadeOut');
+      $('.register').removeClass('animated fadeOut');
+      $('.register').addClass('animated fadeIn');
     });
 
     // let BASEURL = 'https://accounts.google.com/o/oauth2/v2/auth';
@@ -139,7 +146,7 @@ class Signup extends React.Component {
               </section>
 
               <section className="body">
-                <form action="" method="post">
+                <form method="post" onClick={this.loginHandleSubmit}>
 
                   <FaUser className='icon' />
                   <label for="email">
@@ -181,7 +188,7 @@ class Signup extends React.Component {
 
               <section className="body">
 
-                <form method="post" onSubmit={this.handleSubmit}>
+                <form method="post" onSubmit={this.signupHandleSubmit}>
 
                   <FaUser className='icon' />
                   <label for="name">

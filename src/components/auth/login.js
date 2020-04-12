@@ -27,9 +27,16 @@ class Login extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  handleSubmit = e => {
+  loginHandleSubmit = e => {
     e.preventDefault();
+    // console.log('__STATE__', this.state);
     this.context.login(this.state.username, this.state.password);
+    // e.target.reset();
+  }
+
+  signupHandleSubmit = e => {
+    e.preventDefault();
+    this.context.signup(this.state.username, this.state.password);
     e.target.reset();
   }
 
@@ -65,10 +72,10 @@ class Login extends React.Component {
       $('.login-btn').addClass('animated fadeIn');
       $('.register-btn').css('display', 'none');
       $('.box-color').css('left', '20%');
-      $('.login').removeClass('animated fadeInRight');
-      $('.login').addClass('animated fadeOutRight');
-      $('.register').removeClass('animated fadeOutLeft');
-      $('.register').addClass('animated fadeInLeft');
+      $('.login').removeClass('animated fadeIn');
+      $('.login').addClass('animated fadeOut');
+      $('.register').removeClass('animated fadeOut');
+      $('.register').addClass('animated fadeIn');
     });
     $('.login-btn').on('click', function () {
       $('.title').css('display', 'block');
@@ -78,10 +85,10 @@ class Login extends React.Component {
       $('.register-btn').css('display', 'block');
       $('.register-btn').addClass('animated fadeIn');
       $('.box-color').css('left', '50%');
-      $('.register').removeClass('animated fadeInLeft');
-      $('.register').addClass('animated fadeOutLeft');
-      $('.login').removeClass('animated fadeOutRight');
-      $('.login').addClass('animated fadeInRight');
+      $('.register').removeClass('animated fadeIn');
+      $('.register').addClass('animated fadeOut');
+      $('.login').removeClass('animated fadeOut');
+      $('.login').addClass('animated fadeIn');
     });
   }
 
@@ -115,16 +122,16 @@ class Login extends React.Component {
               </section>
 
               <section className="body">
-                <form action="" method="post">
+                <form onClick={this.loginHandleSubmit}>
 
                   <FaUser className='icon' />
-                  <label for="email">
-                    <input type="text" name="email" required placeholder="Enter your email" />
+                  <label htmlFor="email">
+                    <input type="text" name="username" required placeholder="Enter your email" onChange={this.handleChange} />
                   </label>
 
                   <FaLock className='icon' />
-                  <label for="password">
-                    <input type="password" name="password" required placeholder="Enter your password" />
+                  <label htmlFor="password">
+                    <input type="password" name="password" required placeholder="Enter your password" onChange={this.handleChange} />
                   </label>
 
                   <label className="d-flex flex-column">
@@ -157,20 +164,20 @@ class Login extends React.Component {
 
               <section className="body">
 
-                <form method="post" onSubmit={this.handleSubmit}>
+                <form onSubmit={this.signupHandleSubmit}>
 
                   <FaUser className='icon' />
-                  <label for="name">
+                  <label htmlFor="name">
                     <input type="text" name='username' required placeholder="Enter your full name" onChange={this.handleChange} />
                   </label>
 
                   < FaEnvelope className='icon' />
-                  <label for="email">
+                  <label htmlFor="email">
                     <input type="email" name="email" placeholder="Enter your email" onChange={this.handleChange} />
                   </label>
 
                   <FaLock className='icon' />
-                  <label for="password">
+                  <label htmlFor="password">
                     <input type="password" name="password" required placeholder="Enter your password" onChange={this.handleChange} />
                   </label>
 
