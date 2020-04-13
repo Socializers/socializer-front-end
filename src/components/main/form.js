@@ -27,6 +27,8 @@ function Cool(props) {
   const [showDetails, setShowDetails] = useState(false);
   const [details, setDetails] = useState({});
   const [showField, setShowField] = useState(false);
+  const [fieldsNames, setFieldsNames] = useState(['name', 'des', 'img_url']);
+
   useFetch(`${ourAPI}/${context.modelName}`, {}, setItemsList);
 
   useEffect(() => {
@@ -142,9 +144,8 @@ function Cool(props) {
     setShowField(!showField);
   };
 
-  const handleNewField = () => {
-    $('#newAddField').before(`<input class='newAddInput' name=${$('#newAddField').val()} placeholder=${$('#newAddField').val()} />`);
-    $('.newAddInput').on('change', handleInputChange);
+  const handleNewField = (fieldName) => {
+    setFieldsNames([...fieldsNames, fieldName]);
   };
 
   const handleNewFieldUpdate = () => {
@@ -189,9 +190,9 @@ function Cool(props) {
                   <div className="container-cards-front-label">{context.modelName}</div>
 
                   <div className="container-cards-front-button">
-                    <button className="flip-btn" onClick={() => toggleDetails(item._id)}>Hover</button>
+                    <button className="flip-btn" onClick={() => toggleDetails(item._id)}>Details</button>
                     <ConfirmButton
-                      dialog={['Delete', 'Are You Sure?', 'Once more to delete']}
+                      dialog={['Delete', 'Sure?']}
                       action={() => deleteItem(item._id)}
                     />
                   </div>
@@ -249,14 +250,27 @@ function Cool(props) {
       <section className='first-section-form'>
         <div className='model-form'>
           <form id='addForm' onSubmit={addItem}>
-            <input name="name" placeholder="name" onChange={handleInputChange} required />
-            <input name="des" placeholder="description" onChange={handleInputChange} required />
-            <input name="img_url" placeholder="img_url" onChange={handleInputChange} required />
-            <input id='newAddField' placeholder='new field' />
-            <button className='newFieldButton' type='button' onClick={handleNewField}>add field</button>
+
+            {fieldsNames.map(oneField => (
+              <div className="group">
+                <input type="text" name={oneField} onChange={handleInputChange} required />
+                <span className="highlight"></span>
+                <span className="bar"></span>
+                <label>{oneField}</label>
+              </div>
+            ))}
+
+            <div className="group newField">
+              <input id='newAddField' type="text" />
+              <span className="highlight"></span>
+              <span className="bar"></span>
+              <label>New Field</label>
+            </div>
+            <button className='newFieldButton' type='button' onClick={() => handleNewField($('#newAddField').val())}>add field</button>
             <button>Add</button>
           </form>
         </div>
+        <div className='blank'>content</div>
       </section>
     </>
   );

@@ -9,7 +9,7 @@ export default class ConfirmButton extends React.Component {
   };
 
   static defaultProps = {
-    times: 3,
+    times: 2,
   };
 
   state = {
@@ -44,12 +44,12 @@ export default class ConfirmButton extends React.Component {
 }
 
 const Button = styled.button`
-  background: #d41a33;
-  border-radius: 5px;
   border: none;
-  color: white;
+  background: #c62828;
+  border-radius: 5px;
+  color: #ffffff;
+  cursor: pointer;
   font-size: 1rem;
-  height:50px;
   margin-top: 1rem;
   text-transform: uppercase;
   font-weight: 900;
