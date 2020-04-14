@@ -32,6 +32,8 @@ function Cool(props) {
   useFetch(`${ourAPI}/${context.modelName}`, {}, setItemsList);
 
   useEffect(() => {
+
+    $('footer').css('background', '#ffffff00');
     console.log('context', context.modelImg);
     const header = document.querySelector('header');
     const sectionOne = document.querySelector('.zero-section-form');
@@ -270,7 +272,13 @@ function Cool(props) {
             <button>Add</button>
           </form>
         </div>
-        <div className='blank'>content</div>
+        <div className='info'>
+          <h3>HOW TO DO</h3>
+          <p>Here is the form to create; which means you can add whatever you see is a good item for the group.<br />
+          As you can see there are three main fields you must fill them with proper info to create a basic item. The amazing thing here that you can add any field to describe the itme more farther, just add the name of the field, hit <span>"ADD FIELD"</span>, then fill it.<br />
+          After you finish filling the fields hit <span>"ADD"</span> to see the item up above.
+          </p>
+        </div>
       </section>
     </>
   );

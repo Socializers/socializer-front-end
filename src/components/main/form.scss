@@ -15,13 +15,13 @@
 }
 
 .first-section-form {
-  border: solid;
+  // border: solid;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  height: 550px;
+  height: 650px;
   margin-top: 60px;
-  padding: 1%;
+  padding: 5% 1%;
 
   .model-form {
     -webkit-box-shadow: 0 0.125rem 0.8rem #9acd32 !important;
@@ -72,6 +72,7 @@
         label {
           color: #fff;
           font-size: 1.5rem;
+          font-family: "Inter", sans-serif;
           text-transform: uppercase;
           position: absolute;
           pointer-events: none;
@@ -215,9 +216,33 @@
     }
   }
 
-  .blank {
-    border: solid;
+  .info {
+    -webkit-box-shadow: 0 0.125rem 0.8rem #9acd32 !important;
+    box-shadow: 0 0.125rem 0.8rem #9acd32 !important;
+    // border: solid;
+    border-radius: 7px;
     width: 40%;
+
+    h3 {
+      color: #fff;
+      font-family: "Rubik", sans-serif;
+      font-size: 3rem;
+      padding: 5%;
+      text-align: center;
+    }
+
+    p {
+      font-family: "Inter", sans-serif;
+      font-size: 1.5rem;
+      color: #ffffff;
+      line-height: 2rem;
+      padding: 0% 5%;
+
+      span {
+        color: yellowgreen;
+        font-weight: bold;
+      }
+    }
   }
 }
 
@@ -332,7 +357,7 @@
         background: #8cc222;
       }
     }
-    
+
     button:hover {
       background: #ff0000;
     }
@@ -492,7 +517,6 @@
     }
   }
 }
-
 // font-family: "Abril Fatface", cursive;
 // font-family: "Acme", sans-serif;
 // font-family: "Amatic SC", cursive;

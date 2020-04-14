@@ -105,7 +105,7 @@
 }
 
 .third-section-model {
-  background-color: rgb(236, 250, 213);
+  background-color: #ecfad5;
   border: solid rgb(236, 250, 213);
   position: relative;
   height: 500px;
@@ -168,7 +168,7 @@
     padding: 0.25em 0;
     border: 0;
     outline: 0;
-    background-image: linear-gradient(to left,yellowgreen, rgb(218, 248, 169), yellowgreen);
+    background-image: linear-gradient(to left, yellowgreen, rgb(218, 248, 169), yellowgreen);
     color: rgba(#000, 0.85);
     font-size: 2rem;
     line-height: 3.6rem;
@@ -312,3 +312,5 @@
     overflow: hidden;
   }
 }
+
+

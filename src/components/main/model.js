@@ -16,6 +16,7 @@ function Model(props) {
 
 
   useEffect(() => {
+    $('footer').css('background', '#ffffff00');
 
     console.log('blabal', modelList);
 
@@ -143,16 +144,6 @@ function Model(props) {
           <div className="signup-button">Add New Section</div>
         </form>
 
-        {/* <form className='model-form' onSubmit={() => createModel(context.modelName, context.modelDesc, context.modelImg)}>
-            <div>
-              <input placeholder='Your Model Name' required onChange={e => context.changeModelName(e.target.value)} />
-              <input id="input-2" type="text" required placeholder='Your Model Pic' onChange={e => context.changeModelImg(e.target.value)} />
-              <textarea id='input-3' placeholder='Please fill this with a brief desription about the model that you wanna create' required onChange={e => context.changeModelDesc(e.target.value)} />
-            </div>
-            <FileUpload />
-            <button> Create Model </button>
-          </form> */}
-        {/* </div> */}
       </section>
     </>
   );

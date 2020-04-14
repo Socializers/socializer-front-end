@@ -54,6 +54,7 @@ header {
   text-transform: uppercase;
   letter-spacing: 2px;
   font-size: 1rem;
+  font-family: "Rubik", sans-serif;
 
   &:after {
     content: "";
@@ -74,7 +75,7 @@ header {
 
   &--btn {
     border: 1.5px solid currentColor;
-    border-radius: 2em;
+    border-radius: 1em;
     margin-left: 1em;
     transition: background 250ms ease-in-out;
     letter-spacing: 1px;
