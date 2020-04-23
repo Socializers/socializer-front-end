@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 
 import React, { useState, useEffect, useContext } from 'react';
-import { FaFeather, FaSave } from 'react-icons/fa';
 import Loader from 'react-loader-spinner';
 import $ from 'jquery';
 import useFetch from '../hooks/useFetch.js';
@@ -28,6 +27,7 @@ function Cool(props) {
   const [details, setDetails] = useState({});
   const [showField, setShowField] = useState(false);
   const [fieldsNames, setFieldsNames] = useState(['name', 'des', 'img_url']);
+  const [updateFieldsNames, setUpdateFieldsNames] = useState([[]]);
 
   useFetch(`${ourAPI}/${context.modelName}`, {}, setItemsList);
 
@@ -130,6 +130,7 @@ function Cool(props) {
 
     setShowField(!showField);
     setShowDetails(!showDetails);
+    context.changeHeaderBackground('#9acd32');
 
     const updatedItem = $('#updateForm').serializeArray();
 
@@ -143,6 +144,14 @@ function Cool(props) {
   };
 
   const handleUpdate = () => {
+    let temp = [];
+    Object.keys(details).map(property => {
+      if (property !== '__v' && property !== '_id') {
+        temp.push(property);
+      }
+    });
+    setUpdateFieldsNames([...updateFieldsNames, temp]);
+    context.changeHeaderBackground('#4682b4');
     setShowField(!showField);
   };
 
@@ -150,9 +159,10 @@ function Cool(props) {
     setFieldsNames([...fieldsNames, fieldName]);
   };
 
-  const handleNewFieldUpdate = () => {
-    $('#updateForm ul').append(`<li>${$('#newField').val()}: <input class='newInput' name=${$('#newField').val()} /></li>`);
-    $('.newInput').on('change', handleInputChange);
+  const handleNewUpdateField = (fieldName) => {
+    let temp = updateFieldsNames[updateFieldsNames.length - 1];
+    temp.push(fieldName);
+    setUpdateFieldsNames([...updateFieldsNames, temp]);
   };
 
   const toggleDetails = id => {
@@ -178,8 +188,8 @@ function Cool(props) {
       <section className='second-section-form'>
         <div className='items'>
           <ul>
-            {itemsList.map(item => (
-              <li className="container-cards" key={item._id} >
+            {itemsList.map((item, idx) => (
+              <li className="container-cards" key={idx} >
                 <div className="container-cards-surface container-cards-front">
                   <div className="container-cards-front-image">
                     <img src={item.img_url} alt="" />
@@ -213,35 +223,45 @@ function Cool(props) {
       </section>
 
       <When condition={showDetails}>
-        <Modal title="Item Details" close={toggleDetails}>
+        <Modal title={details.name} close={toggleDetails}>
           <div className="item-details">
             <If condition={!showField}>
-              <div className="item">
-                {details.name} <FaFeather className='feather' onClick={handleUpdate} />
-              </div>
               <ul>
+                <li>
+                  <div className='des'>{details['des']}</div>
+                </li>
+
                 {Object.keys(details).map((property, idx) => {
-                  if (idx > 1 && property !== '__v') {
-                    return <li key={idx}>{property}:{' '}
+                  if (idx > 1 && property !== '__v' && property !== 'img_url' && property !== 'des') {
+                    return <li key={idx}>{`${property}: `} 
                       <span> {details[property]}</span>
                     </li>;
                   }
                 })}
               </ul>
+              <div className="item" onClick={handleUpdate}>UPDATE</div>
             </If>
             <If condition={showField}>
               <form id='updateForm' onSubmit={updateItem}>
-                <button className='save'><FaSave /></button>
-                <ul>
-                  {Object.keys(details).map((property, idx) => {
-                    if (property !== '__v' && property !== '_id') {
-                      return <li key={idx}>{property}:{' '}
-                        <input onChange={handleInputChange} name={property} defaultValue={details[property]} />
-                      </li>;
-                    }
-                  })}
-                </ul>
-                <input placeholder='New Field ? Name It PLZ' id='newField' /> <button className='new' type='button' onClick={handleNewFieldUpdate}>add field</button>
+                {/* <button className='save'><FaSave /></button> */}
+                {updateFieldsNames[updateFieldsNames.length - 1].map(property => {
+                  return(
+                    <div className="group">
+                      <input type="text" name={property} onChange={handleInputChange} defaultValue={details[property]} />
+                      <span className="highlight"></span>
+                      <span className="bar"></span>
+                      <label>{property}</label>
+                    </div>
+                  );
+                })}
+                <div className="group newField">
+                  <input id='newUpdateField' type="text" />
+                  <span className="highlight"></span>
+                  <span className="bar"></span>
+                  <label>New Field</label>
+                </div>
+                <button className='newFieldButton' type='button' onClick={() => handleNewUpdateField($('#newUpdateField').val())}>add field</button>
+                <button>UPDATE</button>
               </form>
             </If>
           </div>
@@ -253,8 +273,8 @@ function Cool(props) {
         <div className='model-form'>
           <form id='addForm' onSubmit={addItem}>
 
-            {fieldsNames.map(oneField => (
-              <div className="group">
+            {fieldsNames.map((oneField,idx) => (
+              <div key={idx} className="group">
                 <input type="text" name={oneField} onChange={handleInputChange} required />
                 <span className="highlight"></span>
                 <span className="bar"></span>

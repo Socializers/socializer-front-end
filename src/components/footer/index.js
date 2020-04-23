@@ -121,7 +121,7 @@ export default function Footer() {
       </svg>
 
 
-      <svg className='footer' viewbox="0 0 1440 328" width="100vw">
+      <svg className='footer' viewBox="0 0 1440 328" width="100vw">
         <defs>
           <clipPath id="wave" clipPathUnits="objectBoundingBox" transform="scale(0.00069444444, 0.00304878048)">
             <path
