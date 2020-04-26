@@ -19,10 +19,10 @@ export default function App() {
   return(
     <>
       <ModelProvider>
-        <Header />
-        <Route exact path='/' render={()=>< Home/>} />
-        <Route exact path='/form' render={()=><Form /> }></Route>
         <LoginContext>
+          <Header />
+          <Route exact path='/' render={()=>< Home/>} />
+          <Route exact path='/form' render={()=><Form /> }></Route>
           <Route exact path='/login' render={() => 
             <Login />
           }></Route>

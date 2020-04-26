@@ -44,6 +44,64 @@ header {
   float: left;
 }
 
+.dropdown {
+  font-weight: bold;
+  font-size: 2rem;
+  font-family: "Rubik", sans-serif;
+  color: yellowgreen;
+  text-decoration: none;
+  float: left;
+  margin-left: 30%;
+  margin-top: 0.75%;
+  width: 10%;
+
+  button {
+    background-color: #9acd32;
+    border: none;
+    border-radius: 0.5rem 0.5rem 0rem 0rem;
+    cursor: pointer;
+    color: #ecfad5;
+    font-family: "Rubik", sans-serif;
+    font-size: 1.5rem;
+    height: 35px;
+    width: 100%;
+
+    p {
+      // border: solid;
+      height: 30px;
+      margin: 0% 1%;
+      overflow: hidden;
+      text-transform: uppercase;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .dropdown-content {
+    background-color: #ecfad5;
+    // border: solid;
+    border-radius: 0rem 0rem 0.5rem 0.5rem;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    a {
+      color: #9acd32;
+      font-size: 1.5rem;
+      margin: 5% 0%;
+      text-decoration: none;
+    }
+  }
+
+  div.dropdown-content-container {
+    display: none;
+  }
+}
+
 .nav__link {
   --spacing: 1em;
   text-decoration: none;

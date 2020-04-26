@@ -27,9 +27,9 @@ export default function Footer() {
     });
 
     $(document).ready(function() {
-      $('button').click(function() {
+      $('.letter').click(function() {
         $('.hide').toggle(500);
-        $('button').css({
+        $('.letter').css({
           border: 'none',
           cursor: 'pointer',
           borderBottomLeftRadius: '0px',
@@ -99,7 +99,7 @@ export default function Footer() {
             <h2>Newsletter</h2>
             <p>Sign Up to Our Newsletter to Get Latest Updates & Services</p>
             <div className="button">
-              <button>Sign Up for our Newsletter</button>
+              <button className='letter'>Sign Up for our Newsletter</button>
               <form onSubmit={submitHandeler} className="hide">
                 <input type="email" placeholder="abc@example.com" id="email" required />
                 <input type="submit" value="Submit" />

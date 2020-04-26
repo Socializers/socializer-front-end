@@ -6,6 +6,7 @@ import $ from 'jquery';
 
 import { LoginContext } from './context.js';
 import './signup.scss';
+import { Redirect } from 'react-router-dom';
 
 const If = props => {
   return props.condition ? props.children : null;
@@ -18,6 +19,7 @@ class Signup extends React.Component {
     super(props);
     this.state = {
       username: '',
+      email: '',
       password: '',
     };
   }
@@ -31,12 +33,12 @@ class Signup extends React.Component {
     e.preventDefault();
     // console.log('__STATE__', this.state);
     this.context.login(this.state.username, this.state.password);
-    // e.target.reset();
+    e.target.reset();
   }
 
   signupHandleSubmit = e => {
     e.preventDefault();
-    this.context.signup(this.state.username, this.state.password);
+    this.context.signup(this.state.username,this.state.email, this.state.password);
     e.target.reset();
   }
 
@@ -119,14 +121,14 @@ class Signup extends React.Component {
   render() {
     return (
       <>
+        <If condition={this.context.loggedIn}>
+          <Redirect to='/' />
+        </If>
+
         <section className='zero-section-model'></section>
 
         <section className='first-section-signin animated fadeIn'>
-          {/* <If condition={this.context.loggedIn}>
-            <button onClick={this.context.logout}>Log Out!</button>
-          </If> */}
 
-          {/* <If condition={!this.context.loggedIn}> */}
           <section className="auth-box-up shadow">
 
             <section className="login">
@@ -146,16 +148,16 @@ class Signup extends React.Component {
               </section>
 
               <section className="body">
-                <form method="post" onClick={this.loginHandleSubmit}>
+                <form method="post" onSubmit={this.loginHandleSubmit}>
 
                   <FaUser className='icon' />
-                  <label for="email">
-                    <input type="text" name="email" required placeholder="Enter your email" />
+                  <label htmlFor="username">
+                    <input type="text" name="username" required placeholder="Enter your email" onChange={this.handleChange} />
                   </label>
 
                   <FaLock className='icon' />
-                  <label for="password">
-                    <input type="password" name="password" required placeholder="Enter your password" />
+                  <label htmlFor="password">
+                    <input type="password" name="password" required placeholder="Enter your password" onChange={this.handleChange} />
                   </label>
 
                   <label className="d-flex flex-column">
@@ -191,17 +193,17 @@ class Signup extends React.Component {
                 <form method="post" onSubmit={this.signupHandleSubmit}>
 
                   <FaUser className='icon' />
-                  <label for="name">
+                  <label htmlFor="name">
                     <input type="text" name='username' required placeholder="Enter your full name" onChange={this.handleChange} />
                   </label>
 
                   < FaEnvelope className='icon' />
-                  <label for="email">
+                  <label htmlFor="email">
                     <input type="email" name="email" placeholder="Enter your email" onChange={this.handleChange} />
                   </label>
 
                   <FaLock className='icon' />
-                  <label for="password">
+                  <label htmlFor="password">
                     <input type="password" name="password" required placeholder="Enter your password" onChange={this.handleChange} />
                   </label>
 

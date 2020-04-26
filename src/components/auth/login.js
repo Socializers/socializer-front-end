@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import { FaUser, FaEnvelope, FaLock, FaGoogle, FaGithub, FaFacebook, FaTwitter, FaLinkedin, FaInstagram } from 'react-icons/fa';
 import $ from 'jquery';
 
@@ -31,12 +32,12 @@ class Login extends React.Component {
     e.preventDefault();
     // console.log('__STATE__', this.state);
     this.context.login(this.state.username, this.state.password);
-    // e.target.reset();
+    e.target.reset();
   }
 
   signupHandleSubmit = e => {
     e.preventDefault();
-    this.context.signup(this.state.username, this.state.password);
+    this.context.signup(this.state.username,this.state.email, this.state.password);
     e.target.reset();
   }
 
@@ -95,14 +96,13 @@ class Login extends React.Component {
   render() {
     return (
       <>
+        <If condition={this.context.loggedIn}>
+          <Redirect to='/' />
+        </If>
         <section className='zero-section-model'></section>
 
         <section className='first-section-signin animated fadeIn'>
-          {/* <If condition={this.context.loggedIn}>
-            <button onClick={this.context.logout}>Log Out!</button>
-          </If> */}
 
-          {/* <If condition={!this.context.loggedIn}> */}
           <section className="auth-box shadow">
 
             <section className="login">
@@ -122,10 +122,10 @@ class Login extends React.Component {
               </section>
 
               <section className="body">
-                <form onClick={this.loginHandleSubmit}>
+                <form onSubmit={this.loginHandleSubmit}>
 
                   <FaUser className='icon' />
-                  <label htmlFor="email">
+                  <label htmlFor="username">
                     <input type="text" name="username" required placeholder="Enter your email" onChange={this.handleChange} />
                   </label>
 

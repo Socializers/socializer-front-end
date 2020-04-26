@@ -20,6 +20,8 @@ class LoginProvider extends React.Component {
   }
 
   login = (username, password) => {
+    console.log('hh', username);
+    console.log('aa', password);
     fetch(`${API}/signin`, {
       method: 'post',
       mode: 'cors',
@@ -30,10 +32,11 @@ class LoginProvider extends React.Component {
     })
       .then(response => response.text())
       .then(token => this.validateToken(token))
+      .then(()=> console.log('__STATE__', this.state.user))
       .catch(console.error);
   }
 
-  signup = (username, password) => {
+  signup = (username, email, password) => {
     fetch(`${API}/signup`,{
       method: 'post',
       mode: 'cors',
@@ -42,10 +45,11 @@ class LoginProvider extends React.Component {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       }),
-      body: JSON.stringify({username: username, password: password}),
+      body: JSON.stringify({username: username,email: email , password: password}),
     })
       .then(response => response.text())
       .then(token => this.validateToken(token))
+      .then(()=> console.log('__STATE__', this.state.user))
       .catch(e => console.error(e));
   }
 
