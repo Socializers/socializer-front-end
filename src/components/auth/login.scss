@@ -1,0 +1,74 @@
+.zero-section-model {
+    height: 60px;
+}
+
+.first-section-signin {
+    background-color: rgb(218, 246, 223);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1%;
+
+    form {
+        background-color: white;
+        border: solid rgb(32, 100, 0);
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 300px;
+        padding: 2%;
+        width: 20%;
+
+        input {
+            background: rgb(200, 245, 177);
+            border: none;
+            border-radius: 1em;
+            color: rgb(49, 32, 0);
+            font-size: 20px;
+            height: 4em;
+            margin-bottom: 10%;
+            padding: 0% 5%;
+            width: 90%;
+
+            &:focus {
+                background: rgba(2, 149, 21, 0.5);
+            }
+        }
+    }
+
+    button {
+        border: solid;
+        background-color: #faf73dc9;
+        border-radius: 0.5em;
+        color: black;
+        font-size: 2em;
+        margin-left: 25%;
+        margin-top: 5%;
+        width: 50%;
+
+        &:hover {
+            background-color: #f3ce2b;
+            color: black;
+            cursor: pointer;
+        }
+    }
+
+    .auth{
+        // border: solid;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        padding: 2.9% 0%;
+        width: 25%;
+
+        a{
+            font-size: 2rem;
+            color: rgb(46, 80, 90);
+
+            &:hover{
+                color: rgb(32, 100, 0);
+            }
+        }
+    }
+}

@@ -1,0 +1,113 @@
+header {
+  position: fixed;
+  height: 60px;
+  width: 100%;
+  z-index: 99;
+
+  h1 {
+    // border: solid;
+    color: yellowgreen;
+    font-family: "ZCOOL XiaoWei", serif;
+    font-size: 3em;
+    font-style: italic;
+    float: left;
+    height: 100%;
+    padding-left: 2%;
+    width: 20%;
+  }
+
+  .main {
+    // border: solid;
+    font-size: 1.3em;
+    float: left;
+    height: 100%;
+    width: 40%;
+
+    ul {
+      // border: solid;
+      position: absolute;
+      bottom: 35%;
+      width: 40%;
+
+      li {
+        // border: solid;
+        display: inline;
+        margin: 0% 1%;
+        padding: 5px 10px;
+
+        a {
+          color: white;
+          text-decoration: none;
+        }
+
+        &:hover {
+          border-bottom: solid 1px;
+          color: rgb(139, 200, 218);
+        }
+        &:hover > a {
+          color: rgb(139, 200, 218);
+        }
+      }
+    }
+  }
+
+  .account {
+    // border: solid;
+    font-size: 1.3em;
+    float: left;
+    text-align: center;
+    width: 30%;
+
+    ul {
+      // border: solid;
+      position: absolute;
+      bottom: 35%;
+      left: 70%;
+      width: 30%;
+
+      li {
+        border: solid rgb(46, 80, 90) 2px;
+        border-radius: 0.5em;
+        display: inline;
+        margin: 0% 2%;
+        padding: 2.5% 2.5%;
+
+        a {
+          // border: solid;
+          color: white;
+          text-decoration: none;
+        }
+
+        &:hover {
+          background-color: rgb(102, 150, 165);
+        }
+
+        &:hover > a {
+          color: black;
+        }
+      }
+
+      li:nth-of-type(2) {
+        background-color: rgb(46, 80, 90);
+
+        a {
+          color: white;
+        }
+
+        &:hover {
+          background-color: rgb(102, 150, 165);
+        }
+
+        &:hover > a {
+          color: black;
+        }
+      }
+    }
+  }
+}
+
+.nav-scrolled {
+  color: #333;
+  background-image: linear-gradient(to right, rgb(46, 80, 90), rgb(120, 202, 82));
+  box-shadow: 0 3px 20px rgba(0, 0, 0, 0.2);
+}
